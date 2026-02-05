@@ -24,6 +24,9 @@
       var featuredRaw = (el.getAttribute('data-featured') || '').toLowerCase().trim();
       var isFeatured = featuredRaw === 'true' || featuredRaw === 'yes' || featuredRaw === 'on';
 
+      var sponsoredRaw = (el.getAttribute('data-sponsored') || '').toLowerCase().trim();
+      var isSponsored = sponsoredRaw === 'true' || sponsoredRaw === 'yes' || sponsoredRaw === 'on';
+
       races.push({
         id: 'cms-' + i,
         name:        (el.getAttribute('data-name') || '').trim(),
@@ -35,6 +38,7 @@
         logo:        (el.getAttribute('data-logo') || '').trim(),
         url:         (el.getAttribute('data-url') || '#').trim(),
         featured:    isFeatured,
+        sponsored:   isSponsored,
         lat:         parseFloat(el.getAttribute('data-lat')) || 0,
         lng:         parseFloat(el.getAttribute('data-lng')) || 0
       });
@@ -255,10 +259,33 @@
     });
   }
 
-  // ─── FEATURED RACE ─────────────────────────
+  // ─── FEATURED RACE (Auto-Rotating Weekly) ──
+  function pickFeatured() {
+    // 1. If any race is manually flagged as featured, use it
+    var manual = races.filter(function (r) { return r.featured; });
+    if (manual.length) return manual[0];
+
+    // 2. Otherwise, auto-rotate weekly among upcoming races
+    var now = new Date();
+    var upcoming = races.filter(function (r) {
+      return parseD(r.date) >= now;
+    }).sort(function (a, b) {
+      return parseD(a.date) - parseD(b.date);
+    });
+
+    if (!upcoming.length) return races[0] || null;
+
+    // Week number since epoch — changes every Monday
+    var weekNum = Math.floor((now.getTime() / 1000 / 60 / 60 / 24 + 4) / 7);
+    var idx = weekNum % upcoming.length;
+    return upcoming[idx];
+  }
+
   function renderFeatured() {
-    var f = races.filter(function (r) { return r.featured; })[0];
+    var f = pickFeatured();
     if (!f) { document.getElementById('nceg-featured').style.display = 'none'; return; }
+    // Mark it so it's excluded from the grid
+    f.featured = true;
 
     var logo = f.logo
       ? '<img src="' + esc(f.logo) + '" alt="' + esc(f.name) + ' logo" class="nceg-featured-logo">'
@@ -288,8 +315,15 @@
       ? '<img src="' + esc(r.logo) + '" alt="' + esc(r.name) + '" class="nceg-card-logo">'
       : '<div class="nceg-card-logo-ph"></div>';
 
+    var sponsorBadge = r.sponsored
+      ? '<span class="nceg-sponsor-badge">Sponsored</span>'
+      : '';
+
+    var cardClass = 'nceg-card' + (r.sponsored ? ' nceg-card-sponsored' : '');
+
     return (
-      '<a href="' + esc(r.url) + '" class="nceg-card" data-id="' + r.id + '">' +
+      '<a href="' + esc(r.url) + '" class="' + cardClass + '" data-id="' + r.id + '">' +
+        sponsorBadge +
         '<div class="nceg-card-body">' +
           '<div class="nceg-card-header">' +
             '<span class="nceg-card-date">' + fmtShort(r.date) + '</span>' +
@@ -329,6 +363,9 @@
     });
 
     out.sort(function (a, b) {
+      // Sponsored races always appear first
+      if (a.sponsored && !b.sponsored) return -1;
+      if (!a.sponsored && b.sponsored) return 1;
       if (sv === 'date-desc') return parseD(b.date) - parseD(a.date);
       if (sv === 'name-asc') return a.name.localeCompare(b.name);
       return parseD(a.date) - parseD(b.date);
@@ -453,6 +490,29 @@
     }
 
     setTimeout(function () { map.invalidateSize(); }, 300);
+  }
+
+  // ─── NEWSLETTER FORM ───────────────────────
+  var nlForm = document.getElementById('nceg-newsletter-form');
+  if (nlForm) {
+    nlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name  = document.getElementById('nceg-nl-name').value.trim();
+      var email = document.getElementById('nceg-nl-email').value.trim();
+      var region = document.getElementById('nceg-nl-region').value;
+
+      if (!email) return;
+
+      // Show success state
+      var msgEl = document.getElementById('nceg-nl-message');
+      nlForm.style.display = 'none';
+      msgEl.style.display = 'block';
+      msgEl.textContent = 'You\'re in! We\'ll send ' + region + ' race updates to ' + email;
+
+      console.log('[NCEG] Newsletter signup:', { name: name, email: email, region: region });
+      // To connect to Mailchimp/ConvertKit, replace this with your form action
+      // or use their JS API to POST the data.
+    });
   }
 
   // ─── INIT ──────────────────────────────────
