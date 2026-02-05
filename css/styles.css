@@ -1053,3 +1053,116 @@ h4 { font-size: 1.125rem; }
     margin: 0 var(--space-lg);
   }
 }
+
+
+/* ============================================
+   LEAFLET MAP
+   ============================================ */
+
+#nceg-leaflet-map {
+  width: 100%;
+  height: 520px;
+  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--color-border);
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  #nceg-leaflet-map { height: 380px; }
+}
+
+.nceg-map-popup .leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(27, 42, 74, 0.15);
+  padding: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.nceg-map-popup .leaflet-popup-content {
+  margin: 0;
+  min-width: 220px;
+  max-width: 280px;
+}
+
+.nceg-map-popup .leaflet-popup-tip {
+  box-shadow: 0 4px 20px rgba(27, 42, 74, 0.15);
+}
+
+.nceg-popup-inner { padding: 16px 18px; }
+
+.nceg-popup-date {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  background: rgba(27, 42, 74, 0.06);
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.nceg-popup-name {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.nceg-popup-meta { font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 4px; }
+
+.nceg-popup-distance {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-muted);
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-top: 8px;
+}
+
+.nceg-popup-link {
+  display: block;
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: var(--color-navy);
+  color: #fff !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background 150ms ease;
+}
+
+.nceg-popup-link:hover { background: var(--color-navy-hover); color: #fff !important; }
+
+.nceg-map-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding: 12px 0;
+}
+
+.nceg-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.nceg-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
