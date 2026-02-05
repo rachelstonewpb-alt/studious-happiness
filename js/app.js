@@ -22,186 +22,21 @@
   //   - featured: Featured flag (boolean)
 
   var races = [
-    {
-      id: 'r001',
-      name: 'Blue Ridge Relay',
-      date: '2026-09-12',
-      city: 'Boone',
-      region: 'Northwest',
-      distance: 'Ultra',
-      description: 'A 208-mile team relay through the Blue Ridge Mountains, spanning from Grayson Highlands to Asheville across stunning mountain terrain.',
-      logo: '',
-      url: '#',
-      featured: true
-    },
-    {
-      id: 'r002',
-      name: 'Tobacco Road Marathon',
-      date: '2026-03-15',
-      city: 'Cary',
-      region: 'Central',
-      distance: 'Marathon',
-      description: 'Fast and flat BQ course along the American Tobacco Trail. One of the most popular spring marathons in the Southeast.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r003',
-      name: 'Uwharrie Mountain Run',
-      date: '2026-02-07',
-      city: 'Troy',
-      region: 'Central',
-      distance: 'Ultra',
-      description: 'A grueling 20-mile or 40-mile trail run through the ancient Uwharrie Mountains. Rooted in tradition and challenging single-track.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r004',
-      name: 'Oak City Mile',
-      date: '2026-05-02',
-      city: 'Raleigh',
-      region: 'Central',
-      distance: '5K',
-      description: 'A one-mile street race through downtown Raleigh. Fast, festive, and family-friendly with elite and community heats.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r005',
-      name: 'Grandfather Mountain Marathon',
-      date: '2026-07-11',
-      city: 'Boone',
-      region: 'Northwest',
-      distance: 'Marathon',
-      description: 'The oldest marathon in the Carolinas. A challenging point-to-point course with over 1,600 feet of elevation gain through High Country roads.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r006',
-      name: 'Wrightsville Beach Half Marathon',
-      date: '2026-03-22',
-      city: 'Wrightsville Beach',
-      region: 'Southeast',
-      distance: 'Half Marathon',
-      description: 'A scenic coastal half marathon with views of the Intracoastal Waterway and Atlantic Ocean. A spring tradition for NC runners.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r007',
-      name: 'Croatan Buck 50',
-      date: '2026-04-18',
-      city: 'New Bern',
-      region: 'Northeast',
-      distance: 'Ultra',
-      description: 'A 150K gravel ultra through the Croatan National Forest. Remote, relentless, and one of the East Coast\'s premier ultra-distance events.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r008',
-      name: 'Charlotte Thunder Road Marathon',
-      date: '2026-11-21',
-      city: 'Charlotte',
-      region: 'Southwest',
-      distance: 'Marathon',
-      description: 'Charlotte\'s premier fall marathon through Uptown and surrounding neighborhoods. Fast course with strong crowd support.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r009',
-      name: 'Outer Banks Marathon',
-      date: '2026-11-08',
-      city: 'Kitty Hawk',
-      region: 'Northeast',
-      distance: 'Marathon',
-      description: 'Run through the birthplace of flight along the scenic Outer Banks. A flat, fast course with ocean breezes and barrier island views.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r010',
-      name: 'Fonta Flora State Trail 50K',
-      date: '2026-04-04',
-      city: 'Morganton',
-      region: 'Northwest',
-      distance: 'Ultra',
-      description: 'An ultra-distance trail race along the developing Fonta Flora State Trail with views of Lake James and Linville Gorge.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r011',
-      name: 'Quintiles Wrightsville Beach Triathlon',
-      date: '2026-05-16',
-      city: 'Wrightsville Beach',
-      region: 'Southeast',
-      distance: 'Triathlon',
-      description: 'A sprint and Olympic-distance triathlon at Wrightsville Beach. One of the longest-running multisport events in North Carolina.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r012',
-      name: 'Asheville Running Experience 10K',
-      date: '2026-06-13',
-      city: 'Asheville',
-      region: 'Northwest',
-      distance: '10K',
-      description: 'A hilly 10K through Asheville\'s vibrant downtown and surrounding arts district. Post-race beer garden from local breweries.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r013',
-      name: 'Biltmore Kiwanis Classic 15K',
-      date: '2026-08-29',
-      city: 'Asheville',
-      region: 'Northwest',
-      distance: '10K',
-      description: 'A late-summer classic winding through the historic Biltmore Village area. Great community race with decades of history.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r014',
-      name: 'Ramblin Rose Triathlon',
-      date: '2026-09-20',
-      city: 'Durham',
-      region: 'Central',
-      distance: 'Triathlon',
-      description: 'A women-centric sprint triathlon designed to be welcoming for first-timers and experienced athletes alike.',
-      logo: '',
-      url: '#',
-      featured: false
-    },
-    {
-      id: 'r015',
-      name: 'Mountains-to-Sea Trail 50',
-      date: '2026-10-10',
-      city: 'Black Mountain',
-      region: 'Northwest',
-      distance: 'Ultra',
-      description: 'A 50-mile point-to-point ultra along a section of the 1,175-mile Mountains-to-Sea Trail. Rugged, remote, and rewarding.',
-      logo: '',
-      url: '#',
-      featured: false
-    }
+    { id: 'r001', name: 'Blue Ridge Relay', date: '2026-09-12', city: 'Boone', region: 'Northwest', distance: 'Ultra', lat: 36.2168, lng: -81.6746, description: 'A 208-mile team relay through the Blue Ridge Mountains, spanning from Grayson Highlands to Asheville across stunning mountain terrain.', logo: '', url: '#', featured: true },
+    { id: 'r002', name: 'Tobacco Road Marathon', date: '2026-03-15', city: 'Cary', region: 'Central', distance: 'Marathon', lat: 35.7915, lng: -78.7811, description: 'Fast and flat BQ course along the American Tobacco Trail. One of the most popular spring marathons in the Southeast.', logo: '', url: '#', featured: false },
+    { id: 'r003', name: 'Uwharrie Mountain Run', date: '2026-02-07', city: 'Troy', region: 'Central', distance: 'Ultra', lat: 35.3568, lng: -79.8942, description: 'A grueling 20-mile or 40-mile trail run through the ancient Uwharrie Mountains. Rooted in tradition and challenging single-track.', logo: '', url: '#', featured: false },
+    { id: 'r004', name: 'Oak City Mile', date: '2026-05-02', city: 'Raleigh', region: 'Central', distance: '5K', lat: 35.7796, lng: -78.6382, description: 'A one-mile street race through downtown Raleigh. Fast, festive, and family-friendly with elite and community heats.', logo: '', url: '#', featured: false },
+    { id: 'r005', name: 'Grandfather Mountain Marathon', date: '2026-07-11', city: 'Boone', region: 'Northwest', distance: 'Marathon', lat: 36.1998, lng: -81.6396, description: 'The oldest marathon in the Carolinas. A challenging point-to-point course with over 1,600 feet of elevation gain through High Country roads.', logo: '', url: '#', featured: false },
+    { id: 'r006', name: 'Wrightsville Beach Half Marathon', date: '2026-03-22', city: 'Wrightsville Beach', region: 'Southeast', distance: 'Half Marathon', lat: 34.2085, lng: -77.7964, description: 'A scenic coastal half marathon with views of the Intracoastal Waterway and Atlantic Ocean. A spring tradition for NC runners.', logo: '', url: '#', featured: false },
+    { id: 'r007', name: 'Croatan Buck 50', date: '2026-04-18', city: 'New Bern', region: 'Northeast', distance: 'Ultra', lat: 35.1085, lng: -77.0441, description: 'A 150K gravel ultra through the Croatan National Forest. Remote, relentless, and one of the East Coast\'s premier ultra-distance events.', logo: '', url: '#', featured: false },
+    { id: 'r008', name: 'Charlotte Thunder Road Marathon', date: '2026-11-21', city: 'Charlotte', region: 'Southwest', distance: 'Marathon', lat: 35.2271, lng: -80.8431, description: 'Charlotte\'s premier fall marathon through Uptown and surrounding neighborhoods. Fast course with strong crowd support.', logo: '', url: '#', featured: false },
+    { id: 'r009', name: 'Outer Banks Marathon', date: '2026-11-08', city: 'Kitty Hawk', region: 'Northeast', distance: 'Marathon', lat: 36.0726, lng: -75.7057, description: 'Run through the birthplace of flight along the scenic Outer Banks. A flat, fast course with ocean breezes and barrier island views.', logo: '', url: '#', featured: false },
+    { id: 'r010', name: 'Fonta Flora State Trail 50K', date: '2026-04-04', city: 'Morganton', region: 'Northwest', distance: 'Ultra', lat: 35.7454, lng: -81.6848, description: 'An ultra-distance trail race along the developing Fonta Flora State Trail with views of Lake James and Linville Gorge.', logo: '', url: '#', featured: false },
+    { id: 'r011', name: 'Quintiles Wrightsville Beach Triathlon', date: '2026-05-16', city: 'Wrightsville Beach', region: 'Southeast', distance: 'Triathlon', lat: 34.2104, lng: -77.7906, description: 'A sprint and Olympic-distance triathlon at Wrightsville Beach. One of the longest-running multisport events in North Carolina.', logo: '', url: '#', featured: false },
+    { id: 'r012', name: 'Asheville Running Experience 10K', date: '2026-06-13', city: 'Asheville', region: 'Northwest', distance: '10K', lat: 35.5951, lng: -82.5515, description: 'A hilly 10K through Asheville\'s vibrant downtown and surrounding arts district. Post-race beer garden from local breweries.', logo: '', url: '#', featured: false },
+    { id: 'r013', name: 'Biltmore Kiwanis Classic 15K', date: '2026-08-29', city: 'Asheville', region: 'Northwest', distance: '10K', lat: 35.5781, lng: -82.5521, description: 'A late-summer classic winding through the historic Biltmore Village area. Great community race with decades of history.', logo: '', url: '#', featured: false },
+    { id: 'r014', name: 'Ramblin Rose Triathlon', date: '2026-09-20', city: 'Durham', region: 'Central', distance: 'Triathlon', lat: 35.9940, lng: -78.8986, description: 'A women-centric sprint triathlon designed to be welcoming for first-timers and experienced athletes alike.', logo: '', url: '#', featured: false },
+    { id: 'r015', name: 'Mountains-to-Sea Trail 50', date: '2026-10-10', city: 'Black Mountain', region: 'Northwest', distance: 'Ultra', lat: 35.6179, lng: -82.3212, description: 'A 50-mile point-to-point ultra along a section of the 1,175-mile Mountains-to-Sea Trail. Rugged, remote, and rewarding.', logo: '', url: '#', featured: false }
   ];
 
 
@@ -220,12 +55,7 @@
 
 
   // ─── INITIALIZATION ──────────────────────────
-  function init() {
-    populateCityFilter();
-    renderFeaturedRace();
-    applyFilters();
-    bindEvents();
-  }
+  // init() is defined at the bottom of the file, after initMap()
 
 
   // ─── POPULATE CITY DROPDOWN ──────────────────
@@ -479,7 +309,74 @@
   }, { passive: true });
 
 
+  // ─── INTERACTIVE MAP ────────────────────────
+  function initMap() {
+    var mapEl = document.getElementById('nceg-leaflet-map');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    var map = L.map('nceg-leaflet-map', {
+      scrollWheelZoom: false,
+      zoomControl: true
+    }).setView([35.55, -79.4], 7);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 16
+    }).addTo(map);
+
+    function makeIcon(color) {
+      return L.divIcon({
+        className: 'nceg-map-marker',
+        html: '<svg width="28" height="40" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 26 14 26s14-15.5 14-26C28 6.268 21.732 0 14 0z" fill="' + color + '"/>' +
+          '<circle cx="14" cy="14" r="6" fill="#fff" opacity="0.9"/>' +
+          '<circle cx="14" cy="14" r="3" fill="' + color + '"/>' +
+          '</svg>',
+        iconSize: [28, 40],
+        iconAnchor: [14, 40],
+        popupAnchor: [0, -36]
+      });
+    }
+
+    var navyIcon = makeIcon('#1B2A4A');
+    var goldIcon = makeIcon('#C4A265');
+    var markers = L.featureGroup();
+
+    races.forEach(function (r) {
+      if (!r.lat || !r.lng) return;
+      var icon = r.featured ? goldIcon : navyIcon;
+      var popupContent =
+        '<div class="nceg-popup-inner">' +
+          '<span class="nceg-popup-date">' + formatDate(r.date) + '</span>' +
+          '<div class="nceg-popup-name">' + escapeHtml(r.name) + '</div>' +
+          '<div class="nceg-popup-meta">' + escapeHtml(r.city) + ', NC &middot; ' + escapeHtml(r.region) + '</div>' +
+          '<span class="nceg-popup-distance">' + escapeHtml(r.distance) + '</span>' +
+          '<a href="' + escapeHtml(r.url) + '" class="nceg-popup-link">View Race Details</a>' +
+        '</div>';
+      markers.addLayer(
+        L.marker([r.lat, r.lng], { icon: icon })
+          .bindPopup(popupContent, { className: 'nceg-map-popup', maxWidth: 280, minWidth: 220 })
+      );
+    });
+
+    markers.addTo(map);
+    if (markers.getLayers().length > 0) {
+      map.fitBounds(markers.getBounds().pad(0.15));
+    }
+    setTimeout(function () { map.invalidateSize(); }, 300);
+  }
+
+
   // ─── LAUNCH ──────────────────────────────────
+  function init() {
+    populateCityFilter();
+    renderFeaturedRace();
+    applyFilters();
+    bindEvents();
+    initMap();
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
