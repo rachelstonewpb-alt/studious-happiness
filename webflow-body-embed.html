@@ -1,0 +1,185 @@
+<!-- ============================================
+     NC ENDURANCE GUIDE — PAGE HTML
+     Paste into: Webflow page using Embed elements
+     You can use one large Embed, or split into
+     separate Embeds per section.
+     ============================================ -->
+
+  <!-- HEADER -->
+  <header class="nceg-header" id="nceg-header">
+    <div class="nceg-header-inner">
+      <a href="/" class="nceg-logo">NC Endurance Guide</a>
+      <nav class="nceg-nav">
+        <a href="#nceg-directory">Races</a>
+        <a href="#nceg-map">Map</a>
+        <a href="#nceg-submit">Submit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="nceg-hero" id="nceg-hero">
+    <div class="nceg-hero-bg"></div>
+    <div class="nceg-hero-content">
+      <p class="nceg-hero-label">Your Field Guide to NC Endurance Events</p>
+      <h1 class="nceg-hero-title">North Carolina<br>Endurance Guide</h1>
+      <p class="nceg-hero-sub">Curated races + training intel. Updated weekly.</p>
+      <div class="nceg-hero-actions">
+        <a href="#nceg-directory" class="nceg-btn nceg-btn-primary">Find Your Next Race</a>
+        <a href="#nceg-map" class="nceg-btn nceg-btn-secondary">View Race Map</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="nceg-filters" id="nceg-filters">
+    <div class="nceg-filters-inner">
+      <div class="nceg-filter-group">
+        <label class="nceg-filter-label" for="nceg-filter-date">Date</label>
+        <select id="nceg-filter-date" class="nceg-select">
+          <option value="">All Dates</option>
+          <option value="this-month">This Month</option>
+          <option value="next-month">Next Month</option>
+          <option value="3-months">Next 3 Months</option>
+          <option value="6-months">Next 6 Months</option>
+          <option value="this-year">This Year</option>
+        </select>
+      </div>
+      <div class="nceg-filter-group">
+        <label class="nceg-filter-label" for="nceg-filter-region">Region</label>
+        <select id="nceg-filter-region" class="nceg-select">
+          <option value="">All Regions</option>
+          <option value="Northwest">Northwest</option>
+          <option value="Southwest">Southwest</option>
+          <option value="Central">Central</option>
+          <option value="Northeast">Northeast</option>
+          <option value="Southeast">Southeast</option>
+        </select>
+      </div>
+      <div class="nceg-filter-group">
+        <label class="nceg-filter-label" for="nceg-filter-city">City</label>
+        <select id="nceg-filter-city" class="nceg-select">
+          <option value="">All Cities</option>
+        </select>
+      </div>
+      <div class="nceg-filter-group">
+        <label class="nceg-filter-label" for="nceg-filter-distance">Distance</label>
+        <select id="nceg-filter-distance" class="nceg-select">
+          <option value="">All Distances</option>
+          <option value="5K">5K</option>
+          <option value="10K">10K</option>
+          <option value="Half Marathon">Half Marathon</option>
+          <option value="Marathon">Marathon</option>
+          <option value="Ultra">Ultra</option>
+          <option value="Triathlon">Triathlon</option>
+        </select>
+      </div>
+      <div class="nceg-filter-group nceg-filter-group-sort">
+        <label class="nceg-filter-label" for="nceg-filter-sort">Sort</label>
+        <select id="nceg-filter-sort" class="nceg-select">
+          <option value="date-asc">Race Date (Soonest)</option>
+          <option value="date-desc">Race Date (Latest)</option>
+          <option value="name-asc">Name (A–Z)</option>
+        </select>
+      </div>
+      <button class="nceg-btn-clear" id="nceg-clear-filters">Clear Filters</button>
+    </div>
+  </section>
+
+  <!-- FEATURED RACE -->
+  <section class="nceg-featured" id="nceg-featured">
+    <div class="nceg-container">
+      <div class="nceg-section-header">
+        <p class="nceg-micro-label">Featured</p>
+        <h2 class="nceg-section-title">Editor's Pick</h2>
+      </div>
+      <div id="nceg-featured-card" class="nceg-featured-card">
+        <!-- JS populates this -->
+      </div>
+    </div>
+  </section>
+
+  <!-- RACE DIRECTORY -->
+  <section class="nceg-directory" id="nceg-directory">
+    <div class="nceg-container">
+      <div class="nceg-section-header">
+        <p class="nceg-micro-label">Directory</p>
+        <h2 class="nceg-section-title">Upcoming Races</h2>
+        <p class="nceg-race-count" id="nceg-race-count"></p>
+      </div>
+      <div class="nceg-grid" id="nceg-grid">
+        <!-- JS populates this -->
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="nceg-empty" id="nceg-empty" style="display: none;">
+        <div class="nceg-empty-inner">
+          <div class="nceg-empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <h3 class="nceg-empty-title">No races match your filters</h3>
+          <p class="nceg-empty-text">
+            Try adjusting your filters, or reach out to<br>
+            <a href="mailto:enduranceguidenetwork@gmail.com">enduranceguidenetwork@gmail.com</a> to suggest a race.
+          </p>
+          <button class="nceg-btn nceg-btn-outline" id="nceg-empty-clear">Clear All Filters</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RACE MAP -->
+  <section class="nceg-map-section" id="nceg-map">
+    <div class="nceg-container">
+      <div class="nceg-section-header">
+        <p class="nceg-micro-label">Explore</p>
+        <h2 class="nceg-section-title">Race Map — See What's Happening Near You</h2>
+      </div>
+      <div id="nceg-leaflet-map"></div>
+      <div class="nceg-map-legend" id="nceg-map-legend">
+        <div class="nceg-legend-item"><span class="nceg-legend-dot" style="background:#1B2A4A;"></span> Race Location</div>
+        <div class="nceg-legend-item"><span class="nceg-legend-dot" style="background:#C4A265;"></span> Featured Race</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT A RACE -->
+  <section class="nceg-submit" id="nceg-submit">
+    <div class="nceg-container">
+      <div class="nceg-submit-card">
+        <p class="nceg-micro-label">Contribute</p>
+        <h2 class="nceg-submit-title">Don't see your race listed?</h2>
+        <p class="nceg-submit-text">We update weekly. Submit your race details and we'll review it for inclusion in the directory.</p>
+        <a href="mailto:enduranceguidenetwork@gmail.com?subject=Race%20Submission%20-%20NC%20Endurance%20Guide" class="nceg-btn nceg-btn-primary">Submit a Race</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="nceg-footer">
+    <div class="nceg-container">
+      <div class="nceg-footer-inner">
+        <div class="nceg-footer-brand">
+          <a href="/" class="nceg-footer-logo">NC Endurance Guide</a>
+          <p class="nceg-footer-tagline">A curated field guide for North Carolina endurance athletes.</p>
+        </div>
+        <div class="nceg-footer-links">
+          <p class="nceg-micro-label">Directory</p>
+          <a href="#nceg-directory">All Races</a>
+          <a href="#nceg-map">Race Map</a>
+          <a href="#nceg-submit">Submit a Race</a>
+        </div>
+        <div class="nceg-footer-links">
+          <p class="nceg-micro-label">Connect</p>
+          <a href="mailto:enduranceguidenetwork@gmail.com">Email Us</a>
+        </div>
+      </div>
+      <div class="nceg-footer-bottom">
+        <p>&copy; 2026 North Carolina Endurance Guide. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
