@@ -1,13 +1,68 @@
 <!-- ============================================
-     NC ENDURANCE GUIDE — FOOTER JAVASCRIPT
+     NC ENDURANCE GUIDE — FOOTER JAVASCRIPT (CMS-Connected)
      Paste into: Webflow > Page Settings > Custom Code > Before </body> tag
      ============================================ -->
 <script>
 (function () {
   'use strict';
 
-  // ─── CMS DATA: "NC Races" Collection ───────
-  var races = [
+  // ─── READ RACE DATA FROM WEBFLOW CMS ──────
+  // The hidden Collection List outputs <div class="nceg-cms-race">
+  // elements with data-* attributes for each race.
+  // If no CMS data found, falls back to sample data for testing.
+
+  function loadRacesFromCMS() {
+    var items = document.querySelectorAll('.nceg-cms-race');
+    if (!items.length) return null;
+
+    var races = [];
+    items.forEach(function (el, i) {
+      var dateRaw = (el.getAttribute('data-date') || '').trim();
+      // Handle Webflow date formats: "2026-09-12" or "September 12, 2026" etc.
+      var dateISO = normalizeDate(dateRaw);
+
+      var featuredRaw = (el.getAttribute('data-featured') || '').toLowerCase().trim();
+      var isFeatured = featuredRaw === 'true' || featuredRaw === 'yes' || featuredRaw === 'on';
+
+      races.push({
+        id: 'cms-' + i,
+        name:        (el.getAttribute('data-name') || '').trim(),
+        date:        dateISO,
+        city:        (el.getAttribute('data-city') || '').trim(),
+        region:      (el.getAttribute('data-region') || '').trim(),
+        distance:    (el.getAttribute('data-distance') || '').trim(),
+        description: (el.getAttribute('data-description') || '').trim(),
+        logo:        (el.getAttribute('data-logo') || '').trim(),
+        url:         (el.getAttribute('data-url') || '#').trim(),
+        featured:    isFeatured,
+        lat:         parseFloat(el.getAttribute('data-lat')) || 0,
+        lng:         parseFloat(el.getAttribute('data-lng')) || 0
+      });
+    });
+
+    return races;
+  }
+
+  // Normalize various date formats to YYYY-MM-DD
+  function normalizeDate(str) {
+    if (!str) return '';
+    // Already in YYYY-MM-DD format
+    if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
+      return str.substring(0, 10);
+    }
+    // Try parsing as a date string (e.g. "September 12, 2026")
+    var d = new Date(str);
+    if (!isNaN(d.getTime())) {
+      var y = d.getFullYear();
+      var m = ('0' + (d.getMonth() + 1)).slice(-2);
+      var day = ('0' + d.getDate()).slice(-2);
+      return y + '-' + m + '-' + day;
+    }
+    return str;
+  }
+
+  // ─── SAMPLE DATA (fallback for testing without CMS) ───
+  var sampleRaces = [
     {
       id: 'r001', name: 'Blue Ridge Relay', date: '2026-09-12',
       city: 'Boone', region: 'Northwest', distance: 'Ultra',
@@ -114,6 +169,10 @@
       logo: '', url: '#', featured: false
     }
   ];
+
+  // ─── LOAD DATA: CMS first, sample as fallback ───
+  var races = loadRacesFromCMS() || sampleRaces;
+  console.log('[NCEG] Loaded ' + races.length + ' races' + (loadRacesFromCMS() ? ' from CMS' : ' (sample data — add CMS Collection List to use live data)'));
 
   // ─── DOM ───────────────────────────────────
   var filterDate     = document.getElementById('nceg-filter-date');
