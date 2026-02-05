@@ -19,11 +19,14 @@
          Collection List Wrapper (class: nceg-cms-data). -->
   </div>
 
+  <!-- SKIP TO CONTENT (ADA / Accessibility) -->
+  <a href="#nceg-directory" class="nceg-skip-link">Skip to main content</a>
+
   <!-- HEADER -->
-  <header class="nceg-header" id="nceg-header">
+  <header class="nceg-header" id="nceg-header" role="banner">
     <div class="nceg-header-inner">
-      <a href="/" class="nceg-logo">NC Endurance Guide</a>
-      <nav class="nceg-nav">
+      <a href="/" class="nceg-logo" aria-label="NC Endurance Guide — Home">NC Endurance Guide</a>
+      <nav class="nceg-nav" role="navigation" aria-label="Main navigation">
         <a href="#nceg-directory">Races</a>
         <a href="#nceg-map">Map</a>
         <a href="#nceg-submit">Submit</a>
@@ -32,8 +35,8 @@
   </header>
 
   <!-- HERO SECTION -->
-  <section class="nceg-hero" id="nceg-hero">
-    <div class="nceg-hero-bg"></div>
+  <section class="nceg-hero" id="nceg-hero" aria-label="Hero banner">
+    <div class="nceg-hero-bg" role="presentation"></div>
     <div class="nceg-hero-content">
       <p class="nceg-hero-label">Your Field Guide to NC Endurance Events</p>
       <h1 class="nceg-hero-title">North Carolina<br>Endurance Guide</h1>
@@ -46,7 +49,7 @@
   </section>
 
   <!-- FILTER BAR -->
-  <section class="nceg-filters" id="nceg-filters">
+  <section class="nceg-filters" id="nceg-filters" role="search" aria-label="Filter races">
     <div class="nceg-filters-inner">
       <div class="nceg-filter-group">
         <label class="nceg-filter-label" for="nceg-filter-date">Date</label>
@@ -101,27 +104,27 @@
   </section>
 
   <!-- FEATURED RACE -->
-  <section class="nceg-featured" id="nceg-featured">
+  <section class="nceg-featured" id="nceg-featured" aria-label="Featured race">
     <div class="nceg-container">
       <div class="nceg-section-header">
         <p class="nceg-micro-label">Featured</p>
         <h2 class="nceg-section-title">Editor's Pick</h2>
       </div>
-      <div id="nceg-featured-card" class="nceg-featured-card">
+      <div id="nceg-featured-card" class="nceg-featured-card" role="article" aria-label="Featured race details">
         <!-- JS populates this -->
       </div>
     </div>
   </section>
 
   <!-- RACE DIRECTORY -->
-  <section class="nceg-directory" id="nceg-directory">
+  <section class="nceg-directory" id="nceg-directory" aria-label="Race directory">
     <div class="nceg-container">
       <div class="nceg-section-header">
         <p class="nceg-micro-label">Directory</p>
         <h2 class="nceg-section-title">Upcoming Races</h2>
-        <p class="nceg-race-count" id="nceg-race-count"></p>
+        <p class="nceg-race-count" id="nceg-race-count" aria-live="polite"></p>
       </div>
-      <div class="nceg-grid" id="nceg-grid">
+      <div class="nceg-grid" id="nceg-grid" role="list" aria-label="Race listings">
         <!-- JS populates this -->
       </div>
 
@@ -147,13 +150,13 @@
   </section>
 
   <!-- RACE MAP -->
-  <section class="nceg-map-section" id="nceg-map">
+  <section class="nceg-map-section" id="nceg-map" aria-label="Interactive race map">
     <div class="nceg-container">
       <div class="nceg-section-header">
         <p class="nceg-micro-label">Explore</p>
         <h2 class="nceg-section-title">Race Map — See What's Happening Near You</h2>
       </div>
-      <div id="nceg-leaflet-map"></div>
+      <div id="nceg-leaflet-map" role="application" aria-label="Map showing race locations across North Carolina"></div>
       <div class="nceg-map-legend" id="nceg-map-legend">
         <div class="nceg-legend-item"><span class="nceg-legend-dot" style="background:#1B2A4A;"></span> Race Location</div>
         <div class="nceg-legend-item"><span class="nceg-legend-dot" style="background:#C4A265;"></span> Featured Race</div>
@@ -162,23 +165,23 @@
   </section>
 
   <!-- SUBMIT A RACE -->
-  <section class="nceg-submit" id="nceg-submit">
+  <section class="nceg-submit" id="nceg-submit" aria-label="Submit a race">
     <div class="nceg-container">
       <div class="nceg-submit-card">
         <p class="nceg-micro-label">Contribute</p>
         <h2 class="nceg-submit-title">Don't see your race listed?</h2>
         <p class="nceg-submit-text">We update weekly. Submit your race details and we'll review it for inclusion in the directory.</p>
-        <a href="mailto:enduranceguidenetwork@gmail.com?subject=Race%20Submission%20-%20NC%20Endurance%20Guide" class="nceg-btn nceg-btn-primary">Submit a Race</a>
+        <a href="mailto:enduranceguidenetwork@gmail.com?subject=Race%20Submission%20-%20NC%20Endurance%20Guide" class="nceg-btn nceg-btn-primary" aria-label="Submit a race via email">Submit a Race</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="nceg-footer">
+  <footer class="nceg-footer" role="contentinfo">
     <div class="nceg-container">
       <div class="nceg-footer-inner">
         <div class="nceg-footer-brand">
-          <a href="/" class="nceg-footer-logo">NC Endurance Guide</a>
+          <a href="/" class="nceg-footer-logo" aria-label="NC Endurance Guide — Home">NC Endurance Guide</a>
           <p class="nceg-footer-tagline">A curated field guide for North Carolina endurance athletes.</p>
         </div>
         <div class="nceg-footer-links">
@@ -190,6 +193,12 @@
         <div class="nceg-footer-links">
           <p class="nceg-micro-label">Connect</p>
           <a href="mailto:enduranceguidenetwork@gmail.com">Email Us</a>
+        </div>
+        <div class="nceg-footer-links">
+          <p class="nceg-micro-label">Legal</p>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+          <a href="/accessibility">Accessibility</a>
         </div>
       </div>
       <div class="nceg-footer-bottom">

@@ -720,7 +720,7 @@ a:hover { color: var(--color-gold); }
 
 .nceg-footer-inner {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: var(--space-2xl);
   padding-bottom: var(--space-2xl);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -762,6 +762,10 @@ a:hover { color: var(--color-gold); }
   .nceg-featured-logo, .nceg-featured-logo-ph { width: 100px; height: 100px; }
   .nceg-footer-inner { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
   .nceg-footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  .nceg-footer-inner { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -925,6 +929,51 @@ a:hover { color: var(--color-gold); }
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
+}
+
+/* ── Skip-to-Content Link (ADA) ── */
+.nceg-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 200;
+  transition: top var(--transition-fast);
+  text-decoration: none;
+}
+
+.nceg-skip-link:focus {
+  top: 0;
+  color: var(--color-white);
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* ── Focus-Visible Styles (Keyboard Navigation / ADA) ── */
+.nceg-select:focus-visible,
+.nceg-btn:focus-visible,
+.nceg-btn-clear:focus-visible,
+.nceg-nav a:focus-visible,
+.nceg-footer-links a:focus-visible,
+.nceg-card:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* ── Reduced Motion (ADA) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Hidden CMS Data Bridge ── */
