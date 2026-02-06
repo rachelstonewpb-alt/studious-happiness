@@ -569,7 +569,13 @@ a:hover { color: var(--color-gold); }
   border-radius: var(--border-radius);
   background-color: var(--color-cream);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
 }
+
+.nceg-card-logo-ph svg { width: 20px; height: 20px; opacity: 0.4; }
 
 .nceg-card-name {
   font-family: var(--font-heading);
@@ -751,6 +757,46 @@ a:hover { color: var(--color-gold); }
   color: rgba(255, 255, 255, 0.35);
 }
 
+/* ── Mobile Filter Toggle ── */
+.nceg-filter-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-navy);
+  background: var(--color-warm-white);
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.nceg-filter-toggle:hover { background: var(--color-cream); }
+
+.nceg-filter-toggle svg { opacity: 0.5; }
+
+.nceg-filter-count {
+  display: none;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--color-white);
+  background: var(--color-gold);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.nceg-filter-count.nceg-has-filters { display: inline-flex; }
+
 /* ── Responsive ── */
 
 @media (max-width: 900px) {
@@ -781,8 +827,15 @@ a:hover { color: var(--color-gold); }
   .nceg-hero-actions { flex-direction: column; align-items: stretch; }
   .nceg-hero-actions .nceg-btn { width: 100%; }
 
-  .nceg-filters { position: relative; top: auto; padding: var(--space-md) 0; }
-  .nceg-filters-inner { flex-direction: column; gap: var(--space-sm); }
+  .nceg-filters { position: relative; top: auto; padding: 0; }
+  .nceg-filter-toggle { display: flex; }
+  .nceg-filters-inner {
+    display: none;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: 0 var(--space-lg) var(--space-lg);
+  }
+  .nceg-filters-inner.nceg-filters-open { display: flex; }
   .nceg-filter-group { min-width: 100%; }
   .nceg-filter-group-sort { min-width: 100%; }
 
