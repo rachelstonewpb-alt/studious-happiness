@@ -50,7 +50,12 @@
 
   <!-- FILTER BAR -->
   <section class="nceg-filters" id="nceg-filters" role="search" aria-label="Filter races">
-    <div class="nceg-filters-inner">
+    <button class="nceg-filter-toggle" id="nceg-filter-toggle" aria-expanded="false" aria-controls="nceg-filters-inner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+      Filter Races
+      <span class="nceg-filter-count" id="nceg-filter-active-count"></span>
+    </button>
+    <div class="nceg-filters-inner" id="nceg-filters-inner">
       <div class="nceg-filter-group">
         <label class="nceg-filter-label" for="nceg-filter-date">Date</label>
         <select id="nceg-filter-date" class="nceg-select">
