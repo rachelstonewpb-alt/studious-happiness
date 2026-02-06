@@ -319,11 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderFeatured() {
     var f = pickFeatured();
     if (!f) { document.getElementById('nceg-featured').style.display = 'none'; return; }
-    // Only exclude featured from the grid if we have enough races (4+)
-    var namedCount = races.filter(function (r) { return r.name; }).length;
-    if (namedCount > 3) {
-      f.featured = true;
-    }
+    // Featured race always appears in the grid too — the Editor's Pick is a spotlight, not a removal
 
     var logo = f.logo
       ? '<img src="' + esc(f.logo) + '" alt="' + esc(f.name) + ' logo" class="nceg-featured-logo">'
@@ -392,7 +388,6 @@ document.addEventListener('DOMContentLoaded', function () {
         sv = filterSort.value;
 
     var out = races.filter(function (r) {
-      if (r.featured) return false;
       if (!r.name) return false; // skip races with no name
       if (!inRange(r.date, dv)) return false;
       if (rv && r.region !== rv) return false;
