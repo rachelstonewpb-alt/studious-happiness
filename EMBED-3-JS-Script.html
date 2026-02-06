@@ -3,8 +3,13 @@
      Paste into: Webflow > Page Settings > Custom Code > Before </body> tag
      ============================================ -->
 <script>
+// Prevent browser from restoring previous scroll position on mobile
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
+
+  // Force scroll to top on page load (fixes mobile loading at bottom)
+  window.scrollTo(0, 0);
 
   // ─── READ RACE DATA FROM WEBFLOW CMS ──────
   // The hidden Collection List outputs <div class="nceg-cms-race">
