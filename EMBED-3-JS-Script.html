@@ -215,12 +215,14 @@
   }
 
   function fmtShort(s) {
+    if (!s || !/^\d{4}-\d{2}-\d{2}/.test(s)) return s || 'TBD';
     var m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var d = parseD(s);
     return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
   }
 
   function fmtLong(s) {
+    if (!s || !/^\d{4}-\d{2}-\d{2}/.test(s)) return s || 'TBD';
     var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     var d = parseD(s);
     return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
@@ -261,20 +263,29 @@
   }
 
   // ─── FEATURED RACE (Auto-Rotating Weekly) ──
+  function isValidRace(r) {
+    return r && r.name && r.date && /^\d{4}-\d{2}-\d{2}/.test(r.date);
+  }
+
   function pickFeatured() {
-    // 1. If any race is manually flagged as featured, use it
-    var manual = races.filter(function (r) { return r.featured; });
+    // 1. If any race is manually flagged as featured AND has valid data, use it
+    var manual = races.filter(function (r) { return r.featured && isValidRace(r); });
     if (manual.length) return manual[0];
 
-    // 2. Otherwise, auto-rotate weekly among upcoming races
+    // 2. Otherwise, auto-rotate weekly among upcoming valid races
     var now = new Date();
     var upcoming = races.filter(function (r) {
-      return parseD(r.date) >= now;
+      return isValidRace(r) && parseD(r.date) >= now;
     }).sort(function (a, b) {
       return parseD(a.date) - parseD(b.date);
     });
 
-    if (!upcoming.length) return races[0] || null;
+    if (!upcoming.length) {
+      // 3. If no upcoming, try any valid race
+      var any = races.filter(isValidRace);
+      if (!any.length) return null;
+      return any[0];
+    }
 
     // Week number since epoch — changes every Monday
     var weekNum = Math.floor((now.getTime() / 1000 / 60 / 60 / 24 + 4) / 7);
