@@ -319,8 +319,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderFeatured() {
     var f = pickFeatured();
     if (!f) { document.getElementById('nceg-featured').style.display = 'none'; return; }
-    // Mark it so it's excluded from the grid
-    f.featured = true;
+    // Only exclude featured from the grid if we have enough races (4+)
+    var namedCount = races.filter(function (r) { return r.name; }).length;
+    if (namedCount > 3) {
+      f.featured = true;
+    }
 
     var logo = f.logo
       ? '<img src="' + esc(f.logo) + '" alt="' + esc(f.name) + ' logo" class="nceg-featured-logo">'
@@ -499,6 +502,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function initMap() {
     var mapEl = document.getElementById('nceg-leaflet-map');
     if (!mapEl || typeof L === 'undefined') return;
+    // Prevent double-initialization (e.g. if script is pasted in two places)
+    if (mapEl._leaflet_id) return;
 
     var map = L.map('nceg-leaflet-map', {
       scrollWheelZoom: false,
