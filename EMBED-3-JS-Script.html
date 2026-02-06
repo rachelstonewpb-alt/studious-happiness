@@ -3,7 +3,7 @@
      Paste into: Webflow > Page Settings > Custom Code > Before </body> tag
      ============================================ -->
 <script>
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   // ─── READ RACE DATA FROM WEBFLOW CMS ──────
@@ -13,6 +13,7 @@
 
   function loadRacesFromCMS() {
     var items = document.querySelectorAll('.nceg-cms-race');
+    console.log('[NCEG] Found ' + items.length + ' .nceg-cms-race elements in DOM');
     if (!items.length) return null;
 
     var races = [];
@@ -225,6 +226,7 @@
   }
 
   function parseD(s) {
+    if (!s || !/^\d{4}-\d{2}-\d{2}/.test(s)) return new Date(9999, 0, 1); // far-future fallback
     var p = s.split('-');
     return new Date(+p[0], +p[1] - 1, +p[2]);
   }
@@ -245,6 +247,7 @@
 
   function inRange(dateStr, key) {
     if (!key) return true;
+    if (!dateStr || !/^\d{4}-\d{2}-\d{2}/.test(dateStr)) return false; // no valid date = exclude from date filters
     var now = new Date(), rd = parseD(dateStr), end;
     switch (key) {
       case 'this-month':
@@ -296,9 +299,14 @@
     });
 
     if (!upcoming.length) {
-      // 3. If no upcoming, try any valid race
+      // 3. If no upcoming valid races, try any valid race
       var any = races.filter(isValidRace);
-      if (!any.length) return null;
+      if (!any.length) {
+        // 4. Last resort: pick first race that at least has a name
+        var named = races.filter(function (r) { return r.name; });
+        if (!named.length) return null;
+        return named[0];
+      }
       return any[0];
     }
 
@@ -581,9 +589,10 @@
   }
 
   // ─── INIT ──────────────────────────────────
+  console.log('[NCEG] Initializing with ' + races.length + ' races');
   populateCities();
   renderFeatured();
   applyFilters();
   initMap();
-})();
+});
 </script>
