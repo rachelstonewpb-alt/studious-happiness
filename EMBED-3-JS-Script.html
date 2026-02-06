@@ -175,8 +175,23 @@
   ];
 
   // ─── LOAD DATA: CMS first, sample as fallback ───
-  var races = loadRacesFromCMS() || sampleRaces;
-  console.log('[NCEG] Loaded ' + races.length + ' races' + (loadRacesFromCMS() ? ' from CMS' : ' (sample data — add CMS Collection List to use live data)'));
+  var cmsData = loadRacesFromCMS();
+  var races;
+  if (cmsData && cmsData.length) {
+    // Check if at least 1 CMS race has a name (i.e. real data)
+    var hasValidCMS = cmsData.some(function (r) { return r.name; });
+    if (hasValidCMS) {
+      // Filter out completely empty CMS items (no name at all)
+      races = cmsData.filter(function (r) { return r.name; });
+      console.log('[NCEG] Loaded ' + races.length + ' races from CMS (' + (cmsData.length - races.length) + ' skipped — missing name)');
+    } else {
+      races = sampleRaces;
+      console.log('[NCEG] CMS found ' + cmsData.length + ' items but none have names — using sample data. Fill in your CMS fields.');
+    }
+  } else {
+    races = sampleRaces;
+    console.log('[NCEG] No CMS data found — using ' + sampleRaces.length + ' sample races');
+  }
 
   // ─── DOM ───────────────────────────────────
   var filterDate     = document.getElementById('nceg-filter-date');
@@ -253,7 +268,7 @@
   // ─── POPULATE CITIES ───────────────────────
   function populateCities() {
     var c = [];
-    races.forEach(function (r) { if (c.indexOf(r.city) === -1) c.push(r.city); });
+    races.forEach(function (r) { if (r.city && c.indexOf(r.city) === -1) c.push(r.city); });
     c.sort();
     c.forEach(function (city) {
       var o = document.createElement('option');
@@ -367,6 +382,7 @@
 
     var out = races.filter(function (r) {
       if (r.featured) return false;
+      if (!r.name) return false; // skip races with no name
       if (!inRange(r.date, dv)) return false;
       if (rv && r.region !== rv) return false;
       if (cv && r.city !== cv) return false;
@@ -534,6 +550,8 @@
 
     if (markers.getLayers().length > 0) {
       map.fitBounds(markers.getBounds().pad(0.15));
+      // Don't zoom in past level 10 (prevents street-level zoom with 1-2 markers)
+      if (map.getZoom() > 10) map.setZoom(10);
     }
 
     setTimeout(function () { map.invalidateSize(); }, 300);
