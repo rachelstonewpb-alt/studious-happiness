@@ -1,0 +1,493 @@
+<!-- ============================================
+     STRIDE — RACE DISCOVERY PLATFORM — PAGE HTML
+     Paste into: Webflow page using Embed elements
+     You can use one large Embed, or split into
+     separate Embeds per section.
+     ============================================ -->
+
+<!-- SKIP TO CONTENT (ADA / Accessibility) -->
+<a href="#stride-page-home" class="stride-skip-link">Skip to main content</a>
+
+<!-- ============================================
+     NAVIGATION (always visible)
+     ============================================ -->
+<nav class="stride-nav" role="navigation" aria-label="Main navigation">
+  <div class="stride-nav-inner stride-container">
+    <div class="stride-logo" aria-label="STRIDE Home">⚡ STRIDE</div>
+    <div class="stride-nav-links">
+      <a href="#" data-page="home" class="active">Discover</a>
+      <a href="#" data-page="editorial">Editorial</a>
+      <a href="#" data-page="submit">List Your Race</a>
+      <a href="#" data-page="partner">Partner With Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     HOME PAGE
+     ============================================ -->
+<section class="stride-page stride-page-home active" id="stride-page-home" aria-label="Home — Race discovery">
+
+  <!-- HERO -->
+  <div class="stride-hero" id="stride-hero">
+    <div class="stride-hero-inner stride-container">
+      <p class="stride-hero-badge">✦ The Modern Race Discovery Platform ✦</p>
+      <h1 class="stride-hero-title">Find Your Next<br><span class="stride-hero-gold">Finish Line</span></h1>
+      <p class="stride-hero-subtitle">Discover marathons, ultras, trail runs, and triathlons across all 50 states — curated for athletes who travel to compete.</p>
+
+      <!-- Search -->
+      <div class="stride-search" role="search" aria-label="Search for races">
+        <div class="stride-search-bar">
+          <input type="text" id="stride-search-input" class="stride-search-input" placeholder="Search by race name, city, or state…" aria-label="Search races">
+          <button class="stride-search-btn" id="stride-search-btn" aria-label="Search">Search</button>
+        </div>
+        <div class="stride-search-dropdown" id="stride-search-dropdown" role="listbox" aria-label="Search results">
+          <!-- JS populates search results -->
+        </div>
+      </div>
+
+      <!-- US State Map -->
+      <div class="stride-map-wrap">
+        <div class="stride-map-container" id="stride-map-container" role="img" aria-label="Interactive US state map — click a state to explore races">
+          <!-- JS builds the SVG state circles -->
+        </div>
+        <p class="stride-map-helper">Click any state to explore upcoming races</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED ADVENTURES -->
+  <div class="stride-featured" id="stride-featured" aria-label="Featured adventures">
+    <div class="stride-container">
+      <div class="stride-section-header">
+        <p class="stride-section-label">Curated For You</p>
+        <h2 class="stride-section-title">Featured Adventures</h2>
+      </div>
+      <div class="stride-featured-grid" id="stride-featured-grid" role="list" aria-label="Featured race cards">
+        <!-- JS populates featured race cards -->
+      </div>
+    </div>
+  </div>
+
+  <!-- STORIES & GUIDES -->
+  <div class="stride-stories" id="stride-stories" aria-label="Stories and guides">
+    <div class="stride-container">
+      <div class="stride-section-header">
+        <p class="stride-section-label">From The Journal</p>
+        <h2 class="stride-section-title">Stories &amp; Guides</h2>
+        <a href="#" class="stride-view-all" data-page="editorial">View All →</a>
+      </div>
+      <div class="stride-editorial-grid" id="stride-editorial-grid" role="list" aria-label="Editorial articles">
+        <!-- JS populates editorial cards -->
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND LOGOS -->
+  <div class="stride-brands" id="stride-brands" aria-label="Trusted brand partners">
+    <div class="stride-container">
+      <p class="stride-brands-label">Trusted By World-Class Brands</p>
+      <div class="stride-brands-row">
+        <div class="stride-brand-item"><span class="stride-brand-icon">🏨</span> Ritz-Carlton</div>
+        <div class="stride-brand-item"><span class="stride-brand-icon">🏡</span> Airbnb Luxe</div>
+        <div class="stride-brand-item"><span class="stride-brand-icon">👟</span> On Running</div>
+        <div class="stride-brand-item"><span class="stride-brand-icon">💧</span> Gatorade</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL CAPTURE -->
+  <div class="stride-email-capture" id="stride-email-capture" aria-label="Email newsletter signup">
+    <div class="stride-container">
+      <div class="stride-email-card">
+        <p class="stride-section-label">Join 25,000+ Endurance Athletes</p>
+        <h2 class="stride-email-title">Never Miss a Start Line</h2>
+        <p class="stride-email-desc">Get our weekly picks — the best upcoming races, insider travel tips, and exclusive partner offers delivered every Tuesday.</p>
+        <form class="stride-email-form" id="stride-email-form">
+          <div class="stride-email-row">
+            <input type="email" id="stride-email-input" class="stride-email-input" placeholder="Your email address" required aria-label="Email address">
+            <button type="submit" class="stride-email-btn">Join Free</button>
+          </div>
+          <p class="stride-email-fine">No spam, ever. Unsubscribe anytime.</p>
+        </form>
+        <div class="stride-email-success" id="stride-email-message" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================
+     STATE PAGE (hidden by default)
+     ============================================ -->
+<section class="stride-page stride-page-state" id="stride-page-state" aria-label="State race calendar" style="display:none;">
+  <div class="stride-container">
+
+    <!-- Back link -->
+    <a href="#" class="stride-back-link" data-page="home">← Back to Map</a>
+
+    <!-- State header -->
+    <header class="stride-state-header">
+      <p class="stride-section-label">Race Calendar</p>
+      <h1 class="stride-state-name" id="stride-state-name"><!-- JS sets state name --></h1>
+      <p class="stride-state-count" id="stride-state-count" aria-live="polite"><!-- JS sets race count --></p>
+    </header>
+
+    <!-- Type filter buttons -->
+    <div class="stride-type-filters" id="stride-type-filters" role="toolbar" aria-label="Filter races by type">
+      <!-- JS populates: All, Marathon, Half Marathon, 10K, 5K, Ultra, Triathlon, Trail Run -->
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="stride-state-layout">
+
+      <!-- Left: Race cards -->
+      <div class="stride-state-main">
+        <div class="stride-state-grid" id="stride-state-grid" role="list" aria-label="Race listings for this state">
+          <!-- JS populates race cards -->
+        </div>
+        <!-- Empty state -->
+        <div class="stride-state-empty" id="stride-state-empty" style="display:none;">
+          <p class="stride-empty-text">No races match your current filters. Try adjusting your selection.</p>
+        </div>
+      </div>
+
+      <!-- Right: Sidebar (320px) -->
+      <aside class="stride-state-sidebar" aria-label="Travel and lodging recommendations">
+
+        <!-- Where To Stay -->
+        <div class="stride-sidebar-card stride-sidebar-stay">
+          <h3 class="stride-sidebar-heading">Where To Stay</h3>
+          <div class="stride-stay-list">
+            <div class="stride-stay-item">
+              <span class="stride-stay-icon">🏨</span>
+              <div class="stride-stay-info">
+                <p class="stride-stay-name">Ritz-Carlton</p>
+                <p class="stride-stay-desc">Luxury race-cation retreats with runner-friendly amenities</p>
+              </div>
+            </div>
+            <div class="stride-stay-item">
+              <span class="stride-stay-icon">🏡</span>
+              <div class="stride-stay-info">
+                <p class="stride-stay-name">Airbnb Luxe</p>
+                <p class="stride-stay-desc">Premium homes for groups and families traveling to race</p>
+              </div>
+            </div>
+            <div class="stride-stay-item">
+              <span class="stride-stay-icon">🌿</span>
+              <div class="stride-stay-info">
+                <p class="stride-stay-name">Four Seasons</p>
+                <p class="stride-stay-desc">World-class recovery and spa after your event</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Race-cation Guide -->
+        <div class="stride-sidebar-card stride-sidebar-guide">
+          <h3 class="stride-sidebar-heading">Race-cation Guide</h3>
+          <p class="stride-sidebar-text">Plan the perfect trip around your next race — where to eat, train, and explore.</p>
+          <a href="#" class="stride-sidebar-link" data-page="editorial">Read the guide →</a>
+        </div>
+
+        <!-- Race Alert -->
+        <div class="stride-sidebar-card stride-sidebar-alert">
+          <h3 class="stride-sidebar-heading">Race Alert</h3>
+          <p class="stride-sidebar-text">Get notified when new races are added in this state.</p>
+          <button class="stride-alert-btn" id="stride-alert-btn">Set Alert →</button>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     EDITORIAL PAGE (hidden by default)
+     ============================================ -->
+<section class="stride-page stride-page-editorial" id="stride-page-editorial" aria-label="Editorial — Stories and guides" style="display:none;">
+  <div class="stride-container">
+
+    <!-- Header -->
+    <header class="stride-editorial-header">
+      <p class="stride-section-label">The Journal</p>
+      <h1 class="stride-section-title">Stories &amp; Guides</h1>
+      <p class="stride-editorial-subtitle">Long reads, race reports, travel guides, and interviews with the athletes and organizers shaping endurance culture.</p>
+    </header>
+
+    <!-- Featured articles (big cards) -->
+    <div class="stride-editorial-featured" id="stride-editorial-featured" role="list" aria-label="Featured articles">
+      <!-- JS populates featured article cards -->
+    </div>
+
+    <!-- More articles -->
+    <div class="stride-editorial-more-section">
+      <h2 class="stride-editorial-more-heading">More From The Journal</h2>
+      <div class="stride-editorial-more" id="stride-editorial-more" role="list" aria-label="More articles">
+        <!-- JS populates additional article cards -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     ARTICLE PAGE (hidden by default)
+     ============================================ -->
+<section class="stride-page stride-page-article" id="stride-page-article" aria-label="Article detail" style="display:none;">
+  <div class="stride-container">
+
+    <!-- Back link -->
+    <a href="#" class="stride-back-link" data-page="editorial">← Back to Journal</a>
+
+    <!-- Article hero card -->
+    <div class="stride-article-hero" id="stride-article-hero">
+      <!-- JS populates article hero image and title -->
+    </div>
+
+    <!-- Article meta bar -->
+    <div class="stride-article-meta" id="stride-article-meta">
+      <!-- JS populates author, date, read time, category -->
+    </div>
+
+    <!-- Article content -->
+    <article class="stride-article-content" id="stride-article-content">
+      <!-- JS populates article body -->
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================
+     SUBMIT PAGE (hidden by default)
+     ============================================ -->
+<section class="stride-page stride-page-submit" id="stride-page-submit" aria-label="List your race" style="display:none;">
+  <div class="stride-container">
+
+    <!-- Header -->
+    <header class="stride-submit-header">
+      <p class="stride-section-label">For Race Directors</p>
+      <h1 class="stride-section-title">List Your Race</h1>
+      <p class="stride-submit-subtitle">Get your race in front of 250,000+ motivated endurance athletes who travel to compete. Two listing tiers — start for free.</p>
+    </header>
+
+    <!-- Listing Tiers -->
+    <div class="stride-tiers" aria-label="Listing tier options">
+
+      <!-- Basic Listing -->
+      <div class="stride-tier-card stride-tier-basic">
+        <h3 class="stride-tier-name">Basic Listing</h3>
+        <p class="stride-tier-price">Free</p>
+        <ul class="stride-tier-features">
+          <li>Race name &amp; description on calendar</li>
+          <li>Calendar date placement</li>
+          <li>Map pin on state page</li>
+          <li>Registration link to your site</li>
+        </ul>
+      </div>
+
+      <!-- Featured Listing -->
+      <div class="stride-tier-card stride-tier-featured">
+        <span class="stride-tier-badge">Most Popular</span>
+        <h3 class="stride-tier-name">Featured Listing</h3>
+        <p class="stride-tier-price">$99<span class="stride-tier-per"> / race</span></p>
+        <ul class="stride-tier-features">
+          <li>Everything in Basic, plus:</li>
+          <li>Featured badge &amp; priority placement</li>
+          <li>Premium map pin with race details</li>
+          <li>Editorial eligibility — race reviews &amp; guides</li>
+          <li>Social media promotion</li>
+          <li>Where-to-stay pairing with lodging partners</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Submit Form -->
+    <div class="stride-submit-form-wrap">
+      <h2 class="stride-submit-form-title">Submit Your Race</h2>
+      <form class="stride-submit-form" id="stride-submit-form">
+        <div class="stride-form-row">
+          <div class="stride-form-group">
+            <label class="stride-form-label" for="stride-field-name">Race Name</label>
+            <input type="text" id="stride-field-name" class="stride-form-input" placeholder="e.g. Big Sur International Marathon" required>
+          </div>
+          <div class="stride-form-group">
+            <label class="stride-form-label" for="stride-field-type">Race Type</label>
+            <select id="stride-field-type" class="stride-form-input stride-form-select" required>
+              <option value="">Select type…</option>
+              <option value="Marathon">Marathon</option>
+              <option value="Half Marathon">Half Marathon</option>
+              <option value="10K">10K</option>
+              <option value="5K">5K</option>
+              <option value="Ultra">Ultra</option>
+              <option value="Triathlon">Triathlon</option>
+              <option value="Trail Run">Trail Run</option>
+            </select>
+          </div>
+        </div>
+        <div class="stride-form-row">
+          <div class="stride-form-group">
+            <label class="stride-form-label" for="stride-field-date">Date</label>
+            <input type="date" id="stride-field-date" class="stride-form-input" required>
+          </div>
+          <div class="stride-form-group">
+            <label class="stride-form-label" for="stride-field-location">Location</label>
+            <input type="text" id="stride-field-location" class="stride-form-input" placeholder="e.g. Carmel, CA" required>
+          </div>
+        </div>
+        <div class="stride-form-row">
+          <div class="stride-form-group">
+            <label class="stride-form-label" for="stride-field-url">Website URL</label>
+            <input type="url" id="stride-field-url" class="stride-form-input" placeholder="https://yourrace.com" required>
+          </div>
+          <div class="stride-form-group">
+            <label class="stride-form-label" for="stride-field-email">Contact Email</label>
+            <input type="email" id="stride-field-email" class="stride-form-input" placeholder="director@yourrace.com" required>
+          </div>
+        </div>
+        <button type="submit" class="stride-submit-btn" id="stride-submit-btn">Submit Race for Review</button>
+      </form>
+      <div class="stride-submit-success" id="stride-submit-message" style="display:none;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     PARTNER PAGE (hidden by default)
+     ============================================ -->
+<section class="stride-page stride-page-partner" id="stride-page-partner" aria-label="Partner with STRIDE" style="display:none;">
+  <div class="stride-container">
+
+    <!-- Header -->
+    <header class="stride-partner-header">
+      <p class="stride-section-label">For Brands &amp; Destinations</p>
+      <h1 class="stride-section-title">Partner With STRIDE</h1>
+    </header>
+
+    <!-- Audience Stats -->
+    <div class="stride-partner-stats" aria-label="Audience statistics">
+      <div class="stride-stat-item">
+        <p class="stride-stat-value">250K+</p>
+        <p class="stride-stat-label">Monthly Visitors</p>
+      </div>
+      <div class="stride-stat-item">
+        <p class="stride-stat-value">$125K</p>
+        <p class="stride-stat-label">Avg Household Income</p>
+      </div>
+      <div class="stride-stat-item">
+        <p class="stride-stat-value">73%</p>
+        <p class="stride-stat-label">Travel for Races</p>
+      </div>
+      <div class="stride-stat-item">
+        <p class="stride-stat-value">4.2</p>
+        <p class="stride-stat-label">Races Per Year</p>
+      </div>
+    </div>
+
+    <!-- Pricing Tiers -->
+    <div class="stride-partner-tiers" aria-label="Partnership pricing tiers">
+
+      <!-- Presenting Sponsor -->
+      <div class="stride-partner-card">
+        <span class="stride-partner-dot stride-dot-gold"></span>
+        <h3 class="stride-partner-tier-name">Presenting Sponsor</h3>
+        <p class="stride-partner-price">$10,000<span class="stride-partner-per"> / mo</span></p>
+        <ul class="stride-partner-features">
+          <li>Homepage hero banner placement</li>
+          <li>Branded state page takeovers</li>
+          <li>Dedicated editorial feature per month</li>
+          <li>Email newsletter presenting sponsor</li>
+          <li>Premium logo placement across all pages</li>
+          <li>Quarterly performance report &amp; strategy call</li>
+        </ul>
+      </div>
+
+      <!-- Destination Partner -->
+      <div class="stride-partner-card stride-partner-popular">
+        <span class="stride-partner-badge">Most Popular</span>
+        <span class="stride-partner-dot stride-dot-stone"></span>
+        <h3 class="stride-partner-tier-name">Destination Partner</h3>
+        <p class="stride-partner-price">$5,000<span class="stride-partner-per"> / mo</span></p>
+        <ul class="stride-partner-features">
+          <li>Where-to-stay sidebar placement in target states</li>
+          <li>Co-branded race-cation travel guides</li>
+          <li>Featured lodging in email newsletter</li>
+          <li>Logo in brand partner bar on homepage</li>
+          <li>Monthly analytics dashboard</li>
+        </ul>
+      </div>
+
+      <!-- Featured Brand -->
+      <div class="stride-partner-card">
+        <span class="stride-partner-dot stride-dot-slate"></span>
+        <h3 class="stride-partner-tier-name">Featured Brand</h3>
+        <p class="stride-partner-price">$2,000<span class="stride-partner-per"> / mo</span></p>
+        <ul class="stride-partner-features">
+          <li>Logo in brand partner bar on homepage</li>
+          <li>One editorial mention per quarter</li>
+          <li>Social media co-promotion</li>
+          <li>Brand listing in partner directory</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- CTA Section -->
+    <div class="stride-partner-cta" aria-label="Get started with a partnership">
+      <h2 class="stride-partner-cta-title">Ready to reach race-day audiences?</h2>
+      <div class="stride-partner-cta-actions">
+        <a href="#" class="stride-btn stride-btn-primary" id="stride-media-kit-btn">Download Media Kit</a>
+        <a href="#" class="stride-btn stride-btn-secondary" id="stride-schedule-btn">Schedule a Call</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER (always visible)
+     ============================================ -->
+<footer class="stride-footer" role="contentinfo">
+  <div class="stride-container">
+    <div class="stride-footer-inner">
+
+      <!-- Brand -->
+      <div class="stride-footer-brand">
+        <p class="stride-footer-logo" aria-label="STRIDE Home">⚡ STRIDE</p>
+        <p class="stride-footer-tagline">The modern race discovery platform for endurance athletes who travel to compete.</p>
+      </div>
+
+      <!-- Link columns -->
+      <div class="stride-footer-links">
+        <p class="stride-footer-col-label">Discover</p>
+        <a href="#" data-page="home">Find Races</a>
+        <a href="#" data-page="editorial">Stories &amp; Guides</a>
+        <a href="#" data-page="home">Race Map</a>
+      </div>
+
+      <div class="stride-footer-links">
+        <p class="stride-footer-col-label">For Partners</p>
+        <a href="#" data-page="submit">List Your Race</a>
+        <a href="#" data-page="partner">Advertise</a>
+        <a href="#" data-page="partner">Media Kit</a>
+      </div>
+
+      <div class="stride-footer-links">
+        <p class="stride-footer-col-label">Company</p>
+        <a href="/about">About</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+        <a href="/accessibility">Accessibility</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="stride-footer-bottom">
+      <p>&copy; 2026 STRIDE. All rights reserved.</p>
+      <p class="stride-footer-made">Made with passion for the endurance community.</p>
+    </div>
+  </div>
+</footer>
