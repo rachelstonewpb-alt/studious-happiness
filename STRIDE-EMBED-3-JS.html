@@ -234,9 +234,9 @@ document.addEventListener("DOMContentLoaded", function () {
     "linear-gradient(135deg,#1A1028,#20182E,#1A2535,"+MIDNIGHT+")"
   ];
 
-  /* ══════════════════════════════════════
+  /* ════
      RACE CARD HTML
-     ══════════════════════════════════════ */
+     ════ */
   function raceCardHTML(race) {
     var tc = terrainColor(race.terrain);
     var tr = terrainRgba(race.terrain);
@@ -266,9 +266,9 @@ document.addEventListener("DOMContentLoaded", function () {
       + '</div></div></div>';
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      EDITORIAL CARD HTML
-     ══════════════════════════════════════ */
+     ════ */
   function editCardHTML(article, big) {
     var minH = big ? 340 : 200;
     var pad = big ? 36 : 24;
@@ -309,11 +309,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      PAGE NAVIGATION
-     ══════════════════════════════════════ */
+     ════ */
   function navigateTo(page, data) {
     currentPage = page;
+
+    /* Update URL hash for shareable links */
+    if (page === "state" && data) window.location.hash = "/state/" + data;
+    else if (page === "article" && data) window.location.hash = "/article/" + data.id;
+    else if (page !== "home") window.location.hash = "/" + page;
+    else if (window.location.hash) history.replaceState(null, "", window.location.pathname);
 
     /* Hide all pages */
     var pages = document.querySelectorAll('[class*="stride-page-"]');
@@ -347,9 +353,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (page === "partner") renderPartner();
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      HOME PAGE
-     ══════════════════════════════════════ */
+     ════ */
   function renderHome() {
     /* Hero gradient animation */
     var hero = document.getElementById("stride-hero");
@@ -679,9 +685,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      STATE PAGE — populates existing HTML
-     ══════════════════════════════════════ */
+     ════ */
   function renderState(stateCode) {
     if (!stateCode) return;
     var st = STATES[stateCode];
@@ -792,9 +798,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      EDITORIAL PAGE — populates existing HTML
-     ══════════════════════════════════════ */
+     ════ */
   function renderEditorial() {
     var featuredWrap = document.getElementById("stride-editorial-featured");
     var moreWrap = document.getElementById("stride-editorial-more");
@@ -835,9 +841,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      ARTICLE PAGE — populates existing HTML
-     ══════════════════════════════════════ */
+     ════ */
   function renderArticle(article) {
     if (!article) return;
 
@@ -899,9 +905,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      SUBMIT PAGE — add interactivity to existing HTML
-     ══════════════════════════════════════ */
+     ════ */
   function renderSubmit() {
     var form = document.getElementById("stride-submit-form");
     var msg = document.getElementById("stride-submit-message");
@@ -933,9 +939,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      PARTNER PAGE — add interactivity to existing HTML
-     ══════════════════════════════════════ */
+     ════ */
   function renderPartner() {
     var cards = document.querySelectorAll('.stride-page-partner .stride-partner-card');
     for (var i = 0; i < cards.length; i++) {
@@ -960,9 +966,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ══════════════════════════════════════
+  /* ════
      GLOBAL NAV CLICK HANDLERS
-     ══════════════════════════════════════ */
+     ════ */
   var allNavLinks = document.querySelectorAll("[data-page]");
   for (var ni = 0; ni < allNavLinks.length; ni++) {
     allNavLinks[ni].addEventListener("click", function(e) {
@@ -979,11 +985,15 @@ document.addEventListener("DOMContentLoaded", function () {
   var logo = document.querySelector(".stride-logo");
   if (logo) {
     logo.style.cursor = "pointer";
-    logo.addEventListener("click", function() { navigateTo("home"); });
+    logo.addEventListener("click", function() { window.location.hash = ""; navigateTo("home"); });
   }
 
-  /* ── Initialize ── */
-  console.log("[STRIDE] Initializing with " + allRaces.length + " races, " + Object.keys(STATES).length + " states");
-  navigateTo("home");
+  function routeHash(){var h=(window.location.hash||"").replace("#","");
+  if(h.indexOf("/state/")===0){var s=h.substr(7).toUpperCase();if(STATES[s])return navigateTo("state",s);}
+  else if(h==="/editorial")return navigateTo("editorial");
+  else if(h==="/submit")return navigateTo("submit");
+  else if(h==="/partner")return navigateTo("partner");
+  navigateTo("home");}
+  routeHash();window.addEventListener("hashchange",routeHash);
 });
 </script>
