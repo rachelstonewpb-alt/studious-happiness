@@ -61,6 +61,61 @@ document.addEventListener("DOMContentLoaded", function () {
     {bg:"linear-gradient(135deg,#2A1E3A,"+MIDNIGHT+")",ic:"\u{1F319}",tag:"Road",tagCol:GOLD}
   ];
 
+  /* ── CMS Integration — reads from hidden Webflow Collection Lists ── */
+  function readCMSRaces() {
+    var el = document.getElementById("stride-cms-races");
+    if (!el) return null;
+    var items = el.querySelectorAll("[data-race-name]");
+    if (!items.length) return null;
+    var races = [];
+    for (var i = 0; i < items.length; i++) {
+      var d = items[i];
+      var sc = (d.getAttribute("data-race-state") || "").toUpperCase();
+      var st = STATES[sc];
+      var imgUrl = d.getAttribute("data-race-image") || "";
+      races.push({
+        id: "cms-" + i, name: d.getAttribute("data-race-name") || "",
+        type: d.getAttribute("data-race-type") || "Marathon",
+        terrain: d.getAttribute("data-race-terrain") || "Road",
+        featured: d.getAttribute("data-race-featured") === "true",
+        price: d.getAttribute("data-race-price") || "",
+        date: d.getAttribute("data-race-date") || "",
+        city: d.getAttribute("data-race-city") || "",
+        state: st ? st.n : "", stateCode: sc,
+        participants: parseInt(d.getAttribute("data-race-participants")) || 500,
+        rating: d.getAttribute("data-race-rating") || "4.5",
+        img: imgUrl ? {bg:"url("+imgUrl+") center/cover",ic:"",tag:"",tagCol:GOLD} : THEMES[i % THEMES.length]
+      });
+    }
+    return races;
+  }
+
+  function readCMSArticles() {
+    var el = document.getElementById("stride-cms-articles");
+    if (!el) return null;
+    var items = el.querySelectorAll("[data-article-title]");
+    if (!items.length) return null;
+    var articles = [];
+    for (var i = 0; i < items.length; i++) {
+      var d = items[i];
+      var imgUrl = d.getAttribute("data-article-image") || "";
+      var body = d.querySelector(".stride-article-body");
+      articles.push({
+        id: i + 1, title: d.getAttribute("data-article-title") || "",
+        sub: d.getAttribute("data-article-subtitle") || "",
+        tag: d.getAttribute("data-article-tag") || "EDITORIAL",
+        rt: d.getAttribute("data-article-readtime") || "5 min",
+        exc: d.getAttribute("data-article-excerpt") || "",
+        feat: d.getAttribute("data-article-featured") === "true" ? 1 : 0,
+        auth: d.getAttribute("data-article-author") || "",
+        dt: d.getAttribute("data-article-date") || "",
+        img: imgUrl ? {bg:"url("+imgUrl+") center/cover",ic:"",tag:"",tagCol:GOLD} : THEMES[i % THEMES.length],
+        content: body && body.innerHTML.trim() ? [{t:"html",tx:body.innerHTML}] : null
+      });
+    }
+    return articles;
+  }
+
   /* ── Generate Races for a State ── */
   function generateRaces(stateCode) {
     var st = STATES[stateCode];
@@ -96,16 +151,27 @@ document.addEventListener("DOMContentLoaded", function () {
     return races;
   }
 
-  /* ── Build All Races ── */
+  /* ── Build All Races (CMS or demo) ── */
+  var cmsRaces = readCMSRaces();
   var allRaces = [];
-  var stateCodes = Object.keys(STATES);
-  for (var si = 0; si < stateCodes.length; si++) {
-    var stRaces = generateRaces(stateCodes[si]);
-    for (var ri = 0; ri < stRaces.length; ri++) allRaces.push(stRaces[ri]);
+  if (cmsRaces) {
+    allRaces = cmsRaces;
+    var codes = Object.keys(STATES);
+    for (var c = 0; c < codes.length; c++) STATES[codes[c]].r = 0;
+    for (var r = 0; r < allRaces.length; r++) {
+      if (STATES[allRaces[r].stateCode]) STATES[allRaces[r].stateCode].r++;
+    }
+  } else {
+    var stateCodes = Object.keys(STATES);
+    for (var si = 0; si < stateCodes.length; si++) {
+      var stRaces = generateRaces(stateCodes[si]);
+      for (var ri = 0; ri < stRaces.length; ri++) allRaces.push(stRaces[ri]);
+    }
   }
 
-  /* ── Editorial Articles ── */
-  var ARTICLES = [
+  /* ── Editorial Articles (CMS or demo) ── */
+  var cmsArticles = readCMSArticles();
+  var ARTICLES = cmsArticles || [
     {id:1,title:"48 Hours in Big Sur",sub:"Run the Marathon, Stay for the Magic",tag:"RACE-CATION GUIDE",rt:"8 min",
      exc:"The Big Sur International Marathon isn\u2019t just a race \u2014 it\u2019s a pilgrimage. Here\u2019s how to turn 26.2 miles of coastline into the weekend of a lifetime.",
      feat:1,img:THEMES[2],auth:"Sarah Chen",dt:"Jan 15, 2026",
@@ -784,6 +850,7 @@ document.addEventListener("DOMContentLoaded", function () {
           else if (block.t === "h") html += '<h2 style="color:'+CREAM+';font-size:24px;font-family:Georgia,serif;margin-top:48px;margin-bottom:16px;">'+esc(block.tx)+'</h2>';
           else if (block.t === "p") html += '<p style="color:'+STONE+';font-size:16px;line-height:1.85;margin-bottom:20px;">'+esc(block.tx)+'</p>';
           else if (block.t === "q") html += '<blockquote style="border-left:3px solid '+GOLD+';margin:40px 0;padding:16px 24px;background:rgba(201,168,76,0.04);border-radius:0 12px 12px 0;"><p style="color:'+CREAM+';font-size:18px;font-style:italic;font-family:Georgia,serif;line-height:1.7;margin:0;">'+esc(block.tx)+'</p></blockquote>';
+          else if (block.t === "html") html += '<div style="color:'+STONE+';font-size:16px;line-height:1.85;">'+block.tx+'</div>';
           else if (block.t === "side") {
             html += '<div style="background:'+NAVY+';border:1px solid rgba(201,168,76,0.15);border-radius:16px;padding:28px;margin:40px 0;"><div style="color:'+GOLD+';font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">'+esc(block.title)+'</div>';
             for (var b = 0; b < block.items.length; b++) html += '<div style="color:'+STONE+';font-size:14px;margin-bottom:10px;padding-left:16px;border-left:2px solid rgba(201,168,76,0.2);">'+esc(block.items[b])+'</div>';
