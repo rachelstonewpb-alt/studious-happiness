@@ -63,9 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ── CMS Integration — reads from hidden Webflow Collection Lists ── */
   function readCMSRaces() {
-    var el = document.getElementById("stride-cms-races");
-    if (!el) return null;
-    var items = el.querySelectorAll("[data-race-name]");
+    var items = document.querySelectorAll("[data-race-name]");
     if (!items.length) return null;
     var races = [];
     for (var i = 0; i < items.length; i++) {
@@ -91,9 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function readCMSArticles() {
-    var el = document.getElementById("stride-cms-articles");
-    if (!el) return null;
-    var items = el.querySelectorAll("[data-article-title]");
+    var items = document.querySelectorAll("[data-article-title]");
     if (!items.length) return null;
     var articles = [];
     for (var i = 0; i < items.length; i++) {
