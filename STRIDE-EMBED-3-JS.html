@@ -61,6 +61,26 @@ document.addEventListener("DOMContentLoaded", function () {
     {bg:"linear-gradient(135deg,#2A1E3A,"+MIDNIGHT+")",ic:"\u{1F319}",tag:"Road",tagCol:GOLD}
   ];
 
+  /* ── US State Boundary Data ── */
+  var US_OUTLINE = "68,58 170,58 210,58 315,58 430,58 530,72 565,90 580,108 612,135 660,148 695,128 712,88 738,55 752,72 745,105 745,140 738,162 718,185 712,200 718,228 710,248 720,270 712,298 685,318 665,345 655,375 665,408 680,448 660,465 635,450 612,425 585,400 555,402 525,412 500,408 470,402 440,398 395,438 350,445 315,405 290,392 240,392 170,392 130,372 115,348 80,325 55,285 50,230 52,185 55,168 60,128 68,105";
+  var AK_OUTLINE = "85,418 160,418 160,472 85,472";
+  var HI_OUTLINE = "215,448 270,448 270,478 215,478";
+  var STATE_LINES = [
+    "170,58,170,168","210,58,210,135","120,168,120,320","175,168,175,310",
+    "240,200,240,392","315,58,315,392","430,58,430,185","440,185,440,290",
+    "460,240,460,410","510,175,510,300","525,300,525,412","550,190,550,270",
+    "565,320,565,395","590,160,590,260","600,320,600,395","640,175,640,255",
+    "700,175,700,235","712,88,712,162","725,85,725,140","738,55,738,130",
+    "68,105,170,105","55,168,175,168","210,135,430,135","315,185,430,185",
+    "240,200,315,200","315,240,510,240","340,290,460,290","460,300,530,300",
+    "525,305,555,305","540,285,640,285","555,320,640,320","625,275,715,275",
+    "640,305,712,298","560,395,665,395","315,345,460,345","460,360,525,360",
+    "470,175,530,175","480,190,550,190","550,160,590,160","550,260,590,260",
+    "590,250,640,250","640,175,705,175","640,218,700,218","655,248,710,248",
+    "712,140,745,140","710,162,740,162","645,305,665,340","635,235,655,268",
+    "698,218,698,242"
+  ];
+
   /* ── Generate Races for a State ── */
   function generateRaces(stateCode) {
     var st = STATES[stateCode];
@@ -304,6 +324,36 @@ document.addEventListener("DOMContentLoaded", function () {
     buildBrandHovers();
   }
 
+  /* ── Draw State Boundaries ── */
+  function drawBorders(svg, ns) {
+    var outlines = [US_OUTLINE, AK_OUTLINE, HI_OUTLINE];
+    for (var o = 0; o < outlines.length; o++) {
+      var pts = outlines[o].split(" ");
+      var d = "M" + pts[0].replace(",", " ");
+      for (var j = 1; j < pts.length; j++) d += "L" + pts[j].replace(",", " ");
+      d += "Z";
+      var p = document.createElementNS(ns, "path");
+      p.setAttribute("d", d);
+      p.setAttribute("fill", "none");
+      p.setAttribute("stroke", GOLD);
+      p.setAttribute("stroke-width", "0.8");
+      p.setAttribute("opacity", "0.35");
+      svg.appendChild(p);
+    }
+    for (var i = 0; i < STATE_LINES.length; i++) {
+      var c = STATE_LINES[i].split(",");
+      var ln = document.createElementNS(ns, "line");
+      ln.setAttribute("x1", c[0]);
+      ln.setAttribute("y1", c[1]);
+      ln.setAttribute("x2", c[2]);
+      ln.setAttribute("y2", c[3]);
+      ln.setAttribute("stroke", GOLD);
+      ln.setAttribute("stroke-width", "0.5");
+      ln.setAttribute("opacity", "0.2");
+      svg.appendChild(ln);
+    }
+  }
+
   /* ── SVG Map ── */
   function buildMap() {
     var container = document.getElementById("stride-map-container");
@@ -312,6 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 800 500");
     svg.setAttribute("style", "width:100%;");
+    drawBorders(svg, ns);
 
     var tooltip = document.createElement("div");
     tooltip.id = "stride-map-tooltip";
