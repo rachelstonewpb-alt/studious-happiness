@@ -162,11 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var allRaces = [];
   if (cmsRaces) {
     allRaces = cmsRaces;
-    var codes = Object.keys(STATES);
-    for (var c = 0; c < codes.length; c++) STATES[codes[c]].r = 0;
-    for (var r = 0; r < allRaces.length; r++) {
-      if (STATES[allRaces[r].stateCode]) STATES[allRaces[r].stateCode].r++;
-    }
   } else {
     var stateCodes = Object.keys(STATES);
     for (var si = 0; si < stateCodes.length; si++) {
@@ -599,13 +594,14 @@ document.addEventListener("DOMContentLoaded", function () {
   function buildFeatured() {
     var grid = document.getElementById("stride-featured-grid");
     if (!grid) return;
-    var coRaces = generateRaces("CO");
     var featured = [];
-    for (var i = 0; i < coRaces.length; i++) {
-      if (coRaces[i].featured) {
-        featured.push(coRaces[i]);
-        if (featured.length >= 3) break;
-      }
+    /* Try featured from allRaces first (works for both CMS and demo) */
+    for (var i = 0; i < allRaces.length && featured.length < 3; i++) {
+      if (allRaces[i].featured) featured.push(allRaces[i]);
+    }
+    /* If none marked featured, just use first 3 */
+    if (!featured.length) {
+      for (var k = 0; k < allRaces.length && featured.length < 3; k++) featured.push(allRaces[k]);
     }
     var html = "";
     for (var j = 0; j < featured.length; j++) html += raceCardHTML(featured[j]);
@@ -706,7 +702,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var nameEl = document.getElementById("stride-state-name");
     var countEl = document.getElementById("stride-state-count");
     if (nameEl) nameEl.textContent = st.n;
-    if (countEl) countEl.textContent = st.r + " upcoming races \u00B7 Updated weekly";
+    if (countEl) countEl.textContent = currentStateRaces.length + " upcoming races \u00B7 Updated weekly";
 
     /* Build filter buttons */
     var filterWrap = document.getElementById("stride-type-filters");
