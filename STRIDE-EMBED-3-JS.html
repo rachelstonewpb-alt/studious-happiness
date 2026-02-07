@@ -369,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
     buildFeatured();
     buildEditorialHome();
     buildEmailCapture();
-    buildBrandHovers();
+    buildBrands();
   }
 
   /* ── Load Real State Boundaries from CDN ── */
@@ -654,14 +654,28 @@ document.addEventListener("DOMContentLoaded", function () {
     emailInput.addEventListener("blur", function() { this.style.borderColor = "rgba(255,255,255,0.08)"; });
   }
 
-  /* ── Brand Hovers ── */
-  function buildBrandHovers() {
-    var brands = document.getElementById("stride-brands");
-    if (!brands) return;
-    var items = brands.querySelectorAll(".stride-brand-item");
-    for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener("mouseenter", function() { this.style.color = STONE; });
-      items[i].addEventListener("mouseleave", function() { this.style.color = ASH; });
+  /* ── Brand Partners (CMS or demo) ── */
+  function buildBrands() {
+    var wrap = document.getElementById("stride-brands");
+    if (!wrap) return;
+    var bi = document.querySelectorAll("[data-brand-name]");
+    if (bi.length) {
+      var row = wrap.querySelector(".stride-brands-row");
+      if (row) {
+        var h = "";
+        for (var i = 0; i < bi.length; i++) {
+          var nm = esc(bi[i].getAttribute("data-brand-name")||"");
+          var im = bi[i].querySelector("img.stride-brand-img");
+          var ic = bi[i].getAttribute("data-brand-icon")||"\u2605";
+          h += im ? '<div class="stride-brand-item"><img src="'+esc(im.src)+'" alt="'+nm+'" style="height:20px;margin-right:8px;vertical-align:middle;filter:brightness(0) invert(0.7)"> '+nm+'</div>' : '<div class="stride-brand-item"><span class="stride-brand-icon">'+ic+'</span> '+nm+'</div>';
+        }
+        row.innerHTML = h;
+      }
+    }
+    var items = wrap.querySelectorAll(".stride-brand-item");
+    for (var j = 0; j < items.length; j++) {
+      items[j].addEventListener("mouseenter", function() { this.style.color = STONE; });
+      items[j].addEventListener("mouseleave", function() { this.style.color = ASH; });
     }
   }
 
@@ -674,7 +688,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!st) return;
 
     currentFilter = "All";
-    currentStateRaces = generateRaces(stateCode);
+    /* Use real CMS races for this state if available, otherwise generate demo */
+    if (cmsRaces) {
+      currentStateRaces = [];
+      for (var ri = 0; ri < allRaces.length; ri++) {
+        if (allRaces[ri].stateCode === stateCode) currentStateRaces.push(allRaces[ri]);
+      }
+    } else {
+      currentStateRaces = generateRaces(stateCode);
+    }
 
     /* Set state name & count */
     var nameEl = document.getElementById("stride-state-name");
