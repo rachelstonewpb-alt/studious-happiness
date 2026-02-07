@@ -176,18 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {id:1,title:"48 Hours in Big Sur",sub:"Run the Marathon, Stay for the Magic",tag:"RACE-CATION GUIDE",rt:"8 min",
      exc:"The Big Sur International Marathon isn\u2019t just a race \u2014 it\u2019s a pilgrimage. Here\u2019s how to turn 26.2 miles of coastline into the weekend of a lifetime.",
      feat:1,img:THEMES[2],auth:"Sarah Chen",dt:"Jan 15, 2026",
-     content:[
-       {t:"intro",tx:"There are marathons you run, and then there are marathons you experience. The Big Sur International Marathon belongs firmly in the latter category \u2014 a 26.2-mile journey along one of the most breathtaking stretches of coastline on Earth."},
-       {t:"h",tx:"Day One: Arrive, Breathe, Prepare"},
-       {t:"p",tx:"Fly into Monterey Regional Airport, a small, stress-free airport that immediately sets the tone. Pick up your rental and drive south along Highway 1 \u2014 arguably the most scenic commute to a hotel you\u2019ll ever make."},
-       {t:"p",tx:"Spend your afternoon doing a gentle shakeout run along the Carmel River Trail \u2014 flat, forested, and a world away from the drama of tomorrow\u2019s course. Have dinner at Sierra Mar at Post Ranch Inn, perched 1,200 feet above the Pacific."},
-       {t:"h",tx:"Day Two: Race Day Magic"},
-       {t:"p",tx:"The Big Sur Marathon starts in the dark, and that\u2019s part of the magic. Buses carry runners south to Pfeiffer Big Sur State Park, and as the sun rises over the Santa Lucia Mountains, you\u2019ll understand why people fly across the world for this."},
-       {t:"q",tx:"You don\u2019t run Big Sur for a PR. You run it for the photos, the tears at Bixby Bridge, and the story you\u2019ll tell for the rest of your life."},
-       {t:"h",tx:"Day Three: Recover Like Royalty"},
-       {t:"p",tx:"This is where the race-cation earns its name. Book a deep tissue massage at Ventana. Soak in the Japanese hot baths overlooking the canyon. Have a long, slow brunch at Deetjen\u2019s Big Sur Inn."},
-       {t:"side",title:"Where to Stay",items:["Ventana Big Sur \u2014 From $750/night","Post Ranch Inn \u2014 From $1,200/night","Carmel Valley Ranch \u2014 From $450/night","Airbnb Luxe, Carmel \u2014 From $300/night"]}
-     ]},
+     content:[{t:"intro",tx:"The Big Sur International Marathon is a 26.2-mile journey along one of the most breathtaking stretches of coastline on Earth. Here\u2019s how to turn it into the weekend of a lifetime."},{t:"h",tx:"The Course"},{t:"p",tx:"Starting in the dark at Pfeiffer Big Sur State Park, the course winds along Highway 1 with ocean views, Bixby Bridge, and the Santa Lucia Mountains. You don\u2019t run Big Sur for a PR \u2014 you run it for the story."},{t:"h",tx:"Where to Stay"},{t:"p",tx:"Ventana Big Sur ($750/night), Post Ranch Inn ($1,200/night), or Airbnb Luxe in Carmel (from $300/night)."}]},
     {id:2,title:"The 10 Most Beautiful Races in America",sub:"Finish Lines Worth Flying For",tag:"EDITORIAL",rt:"12 min",
      exc:"From the volcanic trails of Hawaii to the covered bridges of Vermont, these are the races that redefine what a finish line can feel like.",
      feat:1,img:THEMES[0],auth:"Marcus Rivera",dt:"Jan 8, 2026"},
@@ -734,6 +723,9 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Render race cards */
     updateStateRaces();
 
+    /* State Map (Mapbox) */
+    buildStateMap(stateCode);
+
     /* Back link */
     var backLink = document.querySelector('.stride-page-state .stride-back-link');
     if (backLink) {
@@ -796,6 +788,37 @@ document.addEventListener("DOMContentLoaded", function () {
       grid.innerHTML = html;
       addHovers(grid);
     }
+  }
+
+  /* ── State Map (Mapbox) ── */
+  var G="32.8,-86.8,6|64.2,-152,4|34.3,-111.7,6|34.8,-92.2,6.5|37.2,-119.5,5.5|39,-105.5,6.5|41.6,-72.7,8|39,-75.5,8|28.1,-81.6,6|32.7,-83.5,6.5|20.5,-157,6|44.4,-114.7,5.5|40,-89.2,6|39.8,-86.3,6.5|42,-93.5,6.5|38.5,-98.3,6.5|37.8,-85.7,6.5|31,-91.8,6.5|45.4,-69.2,6.5|39.1,-76.7,7|42.2,-71.8,7.5|44.3,-84.5,6|46.3,-94.3,6|32.7,-89.7,6.5|38.4,-92.5,6.5|47,-109.6,5.5|41.5,-99.8,6.5|39,-116.8,5.5|43.7,-71.6,7|40.1,-74.7,7.5|34.5,-106,6|42.9,-75.5,6.5|35.6,-79.4,6.5|47.5,-100.4,6.5|40.4,-82.8,6.5|35.5,-97.5,6.5|43.8,-120.6,6|41,-77.6,6.5|41.7,-71.5,9|34,-81,7|44.4,-100.2,6.5|35.8,-86.4,6.5|31.2,-99.4,5.5|39.3,-111.7,6|44,-72.7,7|37.5,-78.8,6.5|47.4,-120.7,6.5|38.6,-80.6,7|44.6,-89.7,6|43,-107.5,6.5";
+  var GEO={},GK=Object.keys(STATES),GP=G.split("|");
+  for(var gi=0;gi<GK.length;gi++){var gp=GP[gi].split(",");GEO[GK[gi]]=[+gp[0],+gp[1],+gp[2]];}
+  var sMap=null;
+  function buildStateMap(sc){
+    var el=document.getElementById("stride-state-map");
+    if(!el||typeof mapboxgl==="undefined")return;
+    var g=GEO[sc];if(!g)return;
+    mapboxgl.accessToken="MAPBOX_TOKEN_REMOVED";
+    if(sMap){sMap.remove();sMap=null;}
+    sMap=new mapboxgl.Map({container:el,style:"mapbox://styles/mapbox/dark-v11",center:[g[1],g[0]],zoom:g[2],attributionControl:false});
+    sMap.addControl(new mapboxgl.NavigationControl({showCompass:false}),"top-right");
+    sMap.on("load",function(){
+      var ly=sMap.getStyle().layers;
+      for(var i=0;i<ly.length;i++){var l=ly[i];
+        if(l.type==="line"&&l.id.indexOf("road")>-1)sMap.setPaintProperty(l.id,"line-color","rgba(201,168,76,0.25)");
+        else if(l.type==="line"&&l.id.indexOf("bound")>-1)sMap.setPaintProperty(l.id,"line-color","rgba(201,168,76,0.4)");
+        else if(l.type==="symbol"&&l.id.indexOf("label")>-1){try{sMap.setPaintProperty(l.id,"text-color","rgba(245,241,231,0.6)");}catch(e){}}
+        else if(l.type==="fill"&&l.id.indexOf("water")>-1)sMap.setPaintProperty(l.id,"fill-color","#0a0f14");
+      }
+      try{sMap.setPaintProperty("background","background-color","#12140d");}catch(e){}
+      for(var r=0;r<currentStateRaces.length;r++){var race=currentStateRaces[r];
+        var mk=document.createElement("div");
+        mk.style.cssText="width:14px;height:14px;background:"+GOLD+";border:2px solid "+CREAM+";border-radius:50%;box-shadow:0 0 12px rgba(201,168,76,0.6);cursor:pointer;";
+        var pp=new mapboxgl.Popup({offset:12,closeButton:false}).setHTML('<div style="background:'+NAVY+';color:'+CREAM+';padding:8px 12px;border-radius:8px;font-size:12px;"><b>'+esc(race.name)+'</b><br><span style="color:'+GOLD+';font-size:10px;">'+esc(race.date)+'</span></div>');
+        new mapboxgl.Marker({element:mk}).setLngLat([g[1]+(Math.random()-0.5)*2,g[0]+(Math.random()-0.5)*1.5]).setPopup(pp).addTo(sMap);
+      }
+    });
   }
 
   /* ════
