@@ -68,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var races = [];
     for (var i = 0; i < items.length; i++) {
       var d = items[i];
+      var nm = d.getAttribute("data-race-name") || "";
+      if (!nm) continue;
       var sc = (d.getAttribute("data-race-state") || "").toUpperCase();
       var st = STATES[sc];
       var imgEl = d.querySelector("img.stride-race-img");
@@ -75,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var featEl = d.querySelector(".stride-race-featured");
       var featVal = d.getAttribute("data-race-featured") || (featEl ? featEl.textContent.trim().toLowerCase() : "");
       races.push({
-        id: "cms-" + i, name: d.getAttribute("data-race-name") || "",
+        id: "cms-" + i, name: nm,
         type: d.getAttribute("data-race-type") || "Marathon",
         terrain: d.getAttribute("data-race-terrain") || "Road",
         featured: featVal === "true",
@@ -88,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         img: imgUrl ? {bg:"url("+imgUrl+") center/cover",ic:"",tag:"",tagCol:GOLD} : THEMES[i % THEMES.length]
       });
     }
-    return races;
+    return races.length ? races : null;
   }
 
   function readCMSArticles() {
@@ -97,13 +99,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var articles = [];
     for (var i = 0; i < items.length; i++) {
       var d = items[i];
+      var tt = d.getAttribute("data-article-title") || "";
+      if (!tt) continue;
       var imgEl = d.querySelector("img.stride-article-img");
       var imgUrl = d.getAttribute("data-article-image") || (imgEl ? imgEl.getAttribute("src") : "") || "";
       var body = d.querySelector(".stride-article-body");
       var featEl = d.querySelector(".stride-article-featured");
       var featVal = d.getAttribute("data-article-featured") || (featEl ? featEl.textContent.trim().toLowerCase() : "");
       articles.push({
-        id: i + 1, title: d.getAttribute("data-article-title") || "",
+        id: i + 1, title: tt,
         sub: d.getAttribute("data-article-subtitle") || "",
         tag: d.getAttribute("data-article-tag") || "EDITORIAL",
         rt: d.getAttribute("data-article-readtime") || "5 min",
@@ -115,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         content: body && body.innerHTML.trim() ? [{t:"html",tx:body.innerHTML}] : null
       });
     }
-    return articles;
+    return articles.length ? articles : null;
   }
 
   /* ── Generate Races for a State ── */
