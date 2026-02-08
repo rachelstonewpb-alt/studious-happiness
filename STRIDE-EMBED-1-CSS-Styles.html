@@ -1979,9 +1979,9 @@ a:hover { color: var(--stride-gold); }
 }
 
 /* Top Bar */
-.stride-topbar{background:rgba(201,168,76,0.08)!important;border-bottom:1px solid rgba(201,168,76,0.15)!important;padding:10px 0!important;position:sticky!important;top:0!important;z-index:1001!important}
-.stride-topbar-inner{display:flex!important;align-items:center!important;gap:16px!important;justify-content:center!important}
-.stride-topbar-text{color:#B8AE9C!important;font-size:13px!important}
+.stride-topbar{background:#12140d!important;border-bottom:1px solid rgba(201,168,76,0.15)!important;padding:8px 0!important;position:relative!important;z-index:1001!important}
+.stride-topbar-inner{display:flex!important;align-items:center!important;gap:12px!important;justify-content:center!important;flex-wrap:nowrap!important}
+.stride-topbar-text{color:#B8AE9C!important;font-size:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .stride-topbar-cta{color:#C9A84C!important;font-weight:700!important;font-size:13px!important;text-decoration:none!important;white-space:nowrap!important}
 .stride-topbar-x{background:none!important;border:none!important;color:#6B7B8D!important;font-size:18px!important;cursor:pointer!important;padding:0 4px!important}
 /* Inline NL */
@@ -2003,7 +2003,8 @@ a:hover { color: var(--stride-gold); }
 .stride-inline-nl-inner{flex-direction:column!important;text-align:center!important}
 .stride-inline-nl-form{width:100%!important}
 .stride-inline-nl-input{flex:1!important;width:auto!important}
-.stride-topbar-text{font-size:11px!important}
+.stride-topbar-text{display:none!important}
+.stride-topbar-cta{font-size:12px!important}
 }
 
 /* Hero subtitle fix */
