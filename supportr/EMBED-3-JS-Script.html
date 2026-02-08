@@ -1,0 +1,117 @@
+<!-- ============================================
+     SUPPORTR — FOOTER JAVASCRIPT
+     Paste into: Webflow > Page Settings > Custom Code > Before </body> tag
+     ============================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  // ─── MOBILE MENU TOGGLE ────────────────────
+  var hamburger = document.getElementById('supportr-hamburger');
+  var mobileMenu = document.getElementById('supportr-mobile-menu');
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function () {
+      mobileMenu.classList.toggle('supportr-open');
+    });
+
+    // Close mobile menu when any link is clicked
+    var mobileLinks = mobileMenu.querySelectorAll('.supportr-mobile-link');
+    mobileLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('supportr-open');
+      });
+    });
+  }
+
+  // ─── LIVE COUNTERS ─────────────────────────
+  var BASE_DATE = new Date('2026-02-08');
+  var NEWSLETTER_BASE = 655;
+  var NEWSLETTER_PER_DAY = 4 / 7;
+  var EMAIL_BASE = 131040;
+  var EMAIL_PER_DAY = 65 / 7;
+
+  function getCurrentCounts() {
+    var now = new Date();
+    var days = (now - BASE_DATE) / (1000 * 60 * 60 * 24);
+    var d = Math.max(days, 0);
+    return {
+      newsletters: Math.floor(NEWSLETTER_BASE + d * NEWSLETTER_PER_DAY),
+      emails: Math.floor(EMAIL_BASE + d * EMAIL_PER_DAY)
+    };
+  }
+
+  function animateCount(el, target, duration) {
+    var start = 0;
+    var startTime = performance.now();
+    function update(currentTime) {
+      var elapsed = currentTime - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(start + (target - start) * eased);
+      el.textContent = current.toLocaleString();
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  var countersAnimated = false;
+  var newsletterEl = document.getElementById('supportr-newsletter-count');
+  var emailEl = document.getElementById('supportr-email-count');
+
+  function checkCounters() {
+    var statsSection = document.querySelector('.supportr-stats');
+    if (!statsSection) return;
+    var rect = statsSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.8 && !countersAnimated) {
+      countersAnimated = true;
+      var counts = getCurrentCounts();
+      if (newsletterEl) animateCount(newsletterEl, counts.newsletters, 2000);
+      if (emailEl) animateCount(emailEl, counts.emails, 2500);
+    }
+  }
+
+  // Update counters every 30 seconds after initial animation
+  setInterval(function () {
+    if (countersAnimated) {
+      var counts = getCurrentCounts();
+      if (newsletterEl) newsletterEl.textContent = counts.newsletters.toLocaleString();
+      if (emailEl) emailEl.textContent = counts.emails.toLocaleString();
+    }
+  }, 30000);
+
+  // ─── SCROLL FADE-UP ANIMATIONS ─────────────
+  function checkFadeUps() {
+    var elements = document.querySelectorAll('.supportr-fade-up');
+    elements.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.88) {
+        el.classList.add('supportr-visible');
+      }
+    });
+  }
+
+  // ─── SCROLL EVENT LISTENER ─────────────────
+  window.addEventListener('scroll', function () {
+    checkCounters();
+    checkFadeUps();
+  });
+
+  // Run checks on load
+  checkCounters();
+  checkFadeUps();
+
+  // ─── CONTACT FORM HANDLER ──────────────────
+  // NOTE: In Webflow, you may want to replace this with
+  // Webflow's native form handling or connect to your
+  // preferred form service (e.g., Zapier, Make, etc.)
+  var contactForm = document.getElementById('supportr-contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thanks for reaching out! We\'ll be in touch soon.');
+      contactForm.reset();
+    });
+  }
+});
+</script>
