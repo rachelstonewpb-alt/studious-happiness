@@ -395,10 +395,12 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!d) continue;
           var p = document.createElementNS(ns, "path");
           p.setAttribute("d", d);
-          p.setAttribute("fill", "none");
+          p.setAttribute("fill", "rgba(201,168,76,0.02)");
           p.setAttribute("stroke", GOLD);
           p.setAttribute("stroke-width", String(Math.max(0.8, 1 / sc)));
           p.setAttribute("opacity", "0.3");
+          p.style.cursor="pointer";
+          p.style.transition="fill 0.3s";
           g.appendChild(p);
         }
         if (g.childNodes.length > 0) svg.insertBefore(g, svg.firstChild);
@@ -438,14 +440,6 @@ document.addEventListener("DOMContentLoaded", function () {
         circle.setAttribute("stroke-width", "0.5");
         circle.setAttribute("style", "transition:all 0.3s cubic-bezier(0.16,1,0.3,1);");
 
-        var ring = document.createElementNS(ns, "circle");
-        ring.setAttribute("cx", st.x);
-        ring.setAttribute("cy", st.y);
-        ring.setAttribute("r", "24");
-        ring.setAttribute("fill", "none");
-        ring.setAttribute("stroke", "rgba(201,168,76,0.3)");
-        ring.setAttribute("stroke-width", "1");
-        ring.setAttribute("style", "opacity:0;transition:opacity 0.3s;");
 
         var label = document.createElementNS(ns, "text");
         label.setAttribute("x", st.x);
@@ -460,24 +454,21 @@ document.addEventListener("DOMContentLoaded", function () {
         label.textContent = code;
 
         g.appendChild(circle);
-        g.appendChild(ring);
         g.appendChild(label);
 
         g.addEventListener("mouseenter", function() {
           circle.setAttribute("r", "18");
           circle.setAttribute("fill", "rgba(201,168,76,0.9)");
           circle.setAttribute("stroke-width", "2");
-          ring.setAttribute("style", "opacity:1;transition:opacity 0.3s;");
           label.setAttribute("fill", MIDNIGHT);
           label.setAttribute("font-size", "9");
           tooltip.style.display = "block";
-          tooltip.innerHTML = '<div style="color:'+GOLD+';font-size:15px;font-weight:700;">'+esc(st.n)+'</div><div style="color:'+STONE+';font-size:12px;margin-top:3px;">'+st.r+' upcoming races</div><div style="color:rgba(201,168,76,0.6);font-size:11px;margin-top:4px;">Click to explore \u2192</div>';
+          tooltip.innerHTML = '<b style="color:'+GOLD+'">'+esc(st.n)+'</b><br><span style="color:'+STONE+';font-size:12px">'+st.r+' races</span>';
         });
         g.addEventListener("mouseleave", function() {
           circle.setAttribute("r", "12");
           circle.setAttribute("fill", "rgba(201,168,76,0.25)");
           circle.setAttribute("stroke-width", "0.5");
-          ring.setAttribute("style", "opacity:0;transition:opacity 0.3s;");
           label.setAttribute("fill", CREAM);
           label.setAttribute("font-size", "7.5");
           tooltip.style.display = "none";
@@ -494,6 +485,10 @@ document.addEventListener("DOMContentLoaded", function () {
     container.style.position = "relative";
     container.appendChild(svg);
     container.appendChild(tooltip);
+    function nearestState(e){var r=svg.getBoundingClientRect();var vx=(e.clientX-r.left)/r.width*800;var vy=(e.clientY-r.top)/r.height*500;var b="",bd=1e9,ks=Object.keys(STATES);for(var j=0;j<ks.length;j++){var s=STATES[ks[j]],d=(vx-s.x)*(vx-s.x)+(vy-s.y)*(vy-s.y);if(d<bd){bd=d;b=ks[j];}}return b;}
+    svg.addEventListener("click",function(e){if(e.target.tagName==="path"){var s=nearestState(e);if(s)navigateTo("state",s);}});
+    svg.addEventListener("mouseover",function(e){if(e.target.tagName==="path")e.target.setAttribute("fill","rgba(201,168,76,0.15)");});
+    svg.addEventListener("mouseout",function(e){if(e.target.tagName==="path")e.target.setAttribute("fill","rgba(201,168,76,0.02)");});
   }
 
   /* ── Search ── */
