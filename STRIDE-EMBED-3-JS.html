@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var GREEN = "#4A9E7D";
   var WHITE = "#FFFFFF";
 
-  /* ── State Data (50 states) ── */
+  /* ── States ── */
   var STATES = {
     AL:{n:"Alabama",x:547,y:328,r:12},AK:{n:"Alaska",x:127,y:438,r:4},
     AZ:{n:"Arizona",x:190,y:302,r:18},AR:{n:"Arkansas",x:458,y:304,r:8},
@@ -585,7 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ── Featured Adventures (home) ── */
+  /* ── Featured ── */
   function buildFeatured() {
     var grid = document.getElementById("stride-featured-grid");
     if (!grid) return;
@@ -604,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
     addHovers(grid);
   }
 
-  /* ── Editorial Cards (home) ── */
+  /* ── Editorial ── */
   function buildEditorialHome() {
     var grid = document.getElementById("stride-editorial-grid");
     if (!grid) return;
@@ -683,7 +683,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!st) return;
 
     currentFilter = "All";
-    /* Use real CMS races for this state if available, otherwise generate demo */
+    /* CMS or demo races */
     if (cmsRaces) {
       currentStateRaces = [];
       for (var ri = 0; ri < allRaces.length; ri++) {
@@ -693,13 +693,14 @@ document.addEventListener("DOMContentLoaded", function () {
       currentStateRaces = generateRaces(stateCode);
     }
 
-    /* Set state name & count */
+    /* Name & count */
     var nameEl = document.getElementById("stride-state-name");
     var countEl = document.getElementById("stride-state-count");
     if (nameEl) nameEl.textContent = st.n;
     if (countEl) countEl.textContent = currentStateRaces.length + " upcoming races \u00B7 Updated weekly";
+    var nlSt=document.getElementById("stride-nl-state");if(nlSt)nlSt.textContent=st.n+" races";
 
-    /* Build filter buttons */
+    /* Filters */
     var filterWrap = document.getElementById("stride-type-filters");
     if (filterWrap) {
       var types = ["All"].concat(RACE_TYPES);
@@ -1005,12 +1006,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* Logo click */
+  /* Logo */
   var logo = document.querySelector(".stride-logo");
   if (logo) {
     logo.style.cursor = "pointer";
     logo.addEventListener("click", function() { window.location.hash = ""; navigateTo("home"); });
   }
+  var tbCta=document.getElementById("stride-topbar-cta");
+  if(tbCta)tbCta.addEventListener("click",function(e){e.preventDefault();navigateTo("home");setTimeout(function(){var el=document.getElementById("stride-email-capture");if(el)el.scrollIntoView({behavior:"smooth"});},300);});
 
   function routeHash(){var h=(window.location.hash||"").replace("#","");
   if(h.indexOf("/state/")===0){var s=h.substr(7).toUpperCase();if(STATES[s])return navigateTo("state",s);}

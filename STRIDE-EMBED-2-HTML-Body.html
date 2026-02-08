@@ -8,6 +8,16 @@
 <!-- SKIP TO CONTENT (ADA / Accessibility) -->
 <a href="#stride-page-home" class="stride-skip-link">Skip to main content</a>
 
+<!-- Sticky Newsletter Top Bar -->
+<div class="stride-topbar" id="stride-topbar">
+  <div class="stride-topbar-inner stride-container">
+    <span class="stride-topbar-text">Weekly race picks, travel tips & guides — delivered every Tuesday.</span>
+    <a href="#" class="stride-topbar-cta" id="stride-topbar-cta">Subscribe free &rarr;</a>
+    <button class="stride-topbar-x" onclick="document.getElementById('stride-topbar').style.display='none';sessionStorage.setItem('stride-bar-closed','1');" aria-label="Dismiss">&times;</button>
+  </div>
+</div>
+<script>if(sessionStorage.getItem('stride-bar-closed')==='1'){document.getElementById('stride-topbar').style.display='none';}</script>
+
 <!-- ============================================
      NAVIGATION (always visible)
      ============================================ -->
@@ -153,6 +163,20 @@
         <div class="stride-state-empty" id="stride-state-empty" style="display:none;">
           <p class="stride-empty-text">No races match your current filters. Try adjusting your selection.</p>
         </div>
+
+        <!-- State Newsletter Signup -->
+        <div class="stride-inline-nl" id="stride-state-nl">
+          <div class="stride-inline-nl-inner">
+            <div class="stride-inline-nl-text">
+              <p class="stride-inline-nl-title">Don't miss a race</p>
+              <p class="stride-inline-nl-desc">Get notified when new <span id="stride-nl-state">races in this state</span> are added — plus weekly picks and travel tips.</p>
+            </div>
+            <form class="stride-inline-nl-form" onsubmit="event.preventDefault();var e=this.querySelector('input');if(e.value.indexOf('@')!==-1){this.innerHTML='<span style=\'color:#C9A84C;font-weight:700;\'>&#10003; You\'re in!</span>';}" method="post">
+              <input type="email" class="stride-inline-nl-input" placeholder="Your email" required>
+              <button type="submit" class="stride-inline-nl-btn">Subscribe</button>
+            </form>
+          </div>
+        </div>
       </div>
 
       <!-- Right: Sidebar (320px) -->
@@ -257,6 +281,18 @@
     <article class="stride-article-content" id="stride-article-content">
       <!-- JS populates article body -->
     </article>
+
+    <!-- Article Newsletter Signup -->
+    <div class="stride-article-nl">
+      <div class="stride-article-nl-inner">
+        <p class="stride-article-nl-title">Enjoyed this? There's more every Tuesday.</p>
+        <p class="stride-article-nl-desc">Race picks, travel guides, and insider tips — one email a week, no spam.</p>
+        <form class="stride-inline-nl-form" onsubmit="event.preventDefault();var e=this.querySelector('input');if(e.value.indexOf('@')!==-1){this.innerHTML='<span style=\'color:#C9A84C;font-weight:700;\'>&#10003; You\'re in! Check your inbox.</span>';}" method="post">
+          <input type="email" class="stride-inline-nl-input" placeholder="Your email" required>
+          <button type="submit" class="stride-inline-nl-btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
 
   </div>
 </section>
