@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
       var d = items[i];
       var nm = d.getAttribute("data-race-name") || "";
       if (!nm) continue;
-      console.log("STRIDE CMS:",nm,"lat-raw:",d.getAttribute("data-race-lat"),"lng-raw:",d.getAttribute("data-race-lng"));
       var sc = (d.getAttribute("data-race-state") || "").toUpperCase();
       var st = STATES[sc];
       var imgEl = d.querySelector("img.stride-race-img");
@@ -88,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         state: st ? st.n : "", stateCode: sc,
         participants: parseInt(d.getAttribute("data-race-participants")) || 500,
         rating: d.getAttribute("data-race-rating") || "4.5",
-        lat:+d.getAttribute("data-race-lat")||0,lng:+d.getAttribute("data-race-lng")||0,
+        lat:parseFloat(d.getAttribute("data-race-lat"))||0,lng:parseFloat(d.getAttribute("data-race-lng"))||0,
         img: imgUrl ? {bg:"url("+imgUrl+") center/cover",ic:"",tag:"",tagCol:GOLD} : THEMES[i % THEMES.length]
       });
     }
