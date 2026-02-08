@@ -51,14 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ── Themes ── */
   var THEMES = [
-    {bg:"linear-gradient(135deg,"+CHARCOAL+","+MIDNIGHT+")",ic:"\u{1F3D4}\uFE0F",tag:"Road",tagCol:GOLD},
-    {bg:"linear-gradient(135deg,#2A3D2E,"+MIDNIGHT+")",ic:"\u{1F332}",tag:"Trail",tagCol:GREEN},
+    {bg:"linear-gradient(135deg,#1A2838,#0D1520)",ic:"\u{1F3D4}\uFE0F",tag:"Road",tagCol:GOLD},
+    {bg:"linear-gradient(135deg,#1E3D28,#0A1A10)",ic:"\u{1F332}",tag:"Trail",tagCol:GREEN},
     {bg:"linear-gradient(135deg,#4A3020,#1E0F08)",ic:"\u{1F305}",tag:"Road",tagCol:GOLD},
-    {bg:"linear-gradient(135deg,#1E2530,"+MIDNIGHT+")",ic:"\u{1F3D9}\uFE0F",tag:"Road",tagCol:GOLD},
-    {bg:"linear-gradient(135deg,#302040,"+MIDNIGHT+")",ic:"\u{1F30A}",tag:"Mixed",tagCol:TERRA},
+    {bg:"linear-gradient(135deg,#162838,#0A1018)",ic:"\u{1F3D9}\uFE0F",tag:"Road",tagCol:GOLD},
+    {bg:"linear-gradient(135deg,#302040,#140A20)",ic:"\u{1F30A}",tag:"Mixed",tagCol:TERRA},
     {bg:"linear-gradient(135deg,#4A3018,#201008)",ic:"\u26F0\uFE0F",tag:"Mountain",tagCol:TERRA},
-    {bg:"linear-gradient(135deg,#1E3A28,"+MIDNIGHT+")",ic:"\u{1F3DE}\uFE0F",tag:"Mixed",tagCol:GREEN},
-    {bg:"linear-gradient(135deg,#2A1E3A,"+MIDNIGHT+")",ic:"\u{1F319}",tag:"Road",tagCol:GOLD}
+    {bg:"linear-gradient(135deg,#1E3A28,#0A1810)",ic:"\u{1F3DE}\uFE0F",tag:"Mixed",tagCol:GREEN},
+    {bg:"linear-gradient(135deg,#2A1E3A,#120A1E)",ic:"\u{1F319}",tag:"Road",tagCol:GOLD}
   ];
 
   /* ── CMS Integration ── */
@@ -234,8 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (race.featured) {
       badge = '<div style="display:inline-block;background:linear-gradient(135deg,'+GOLD+','+GOLD_DK+');color:'+MIDNIGHT+';font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;text-transform:uppercase;margin-bottom:12px;">\u2605 Featured</div>';
     }
-    var border = race.featured ? "1px solid rgba(201,168,76,0.4)" : "1px solid rgba(255,255,255,0.06)";
-    return '<div class="stride-race-card" style="background:'+race.img.bg+';border-radius:16px;position:relative;overflow:hidden;cursor:pointer;border:'+border+';">'
+    var fc=race.featured?" stride-fc":"";
+    return '<div class="stride-race-card'+fc+'" style="background:'+race.img.bg+';border-radius:16px;position:relative;overflow:hidden;cursor:pointer;min-height:280px;">'
       + '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.75) 100%);z-index:1;"></div>'
       + '<div style="position:absolute;top:16px;left:16px;font-size:40px;z-index:0;opacity:0.12;">'+race.img.ic+'</div>'
       + '<div style="position:relative;z-index:2;padding:24px;">'

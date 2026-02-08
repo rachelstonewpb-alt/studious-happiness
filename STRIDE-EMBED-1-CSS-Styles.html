@@ -376,8 +376,10 @@ a:hover { color: var(--stride-gold); }
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.stride-race-card.featured {
-  border-color: rgba(201, 168, 76, 0.4);
+.stride-race-card.featured,
+.stride-fc {
+  border: 1px solid rgba(201,168,76,0.4) !important;
+  box-shadow: 0 0 30px rgba(201,168,76,0.12), 0 0 60px rgba(201,168,76,0.06), inset 0 1px 0 rgba(201,168,76,0.15) !important;
 }
 
 .stride-race-card-body {
@@ -1336,11 +1338,12 @@ a:hover { color: var(--stride-gold); }
    Forces correct layouts inside Webflow embeds
    ============================================ */
 
-/* Featured Adventures — 3 column grid */
+/* Featured Adventures grid */
 #stride-featured-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
   gap: 20px !important;
+  max-width: 100% !important;
 }
 
 /* Editorial grid on home — 2 column */
@@ -1432,22 +1435,26 @@ a:hover { color: var(--stride-gold); }
 }
 
 /* Search button styling */
-.stride-search-btn {
+.stride-search-btn,
+button.stride-search-btn {
   background: linear-gradient(135deg, #C9A84C, #A0873D) !important;
   color: #0A0E17 !important;
   border: none !important;
   border-radius: 12px !important;
-  padding: 10px 24px !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
+  padding: 12px 28px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
   cursor: pointer !important;
   letter-spacing: 0.5px !important;
   white-space: nowrap !important;
-  transition: opacity 200ms ease !important;
+  transition: all 200ms ease !important;
+  box-shadow: 0 2px 12px rgba(201,168,76,0.25) !important;
 }
 
-.stride-search-btn:hover {
+.stride-search-btn:hover,
+button.stride-search-btn:hover {
   opacity: 0.9 !important;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.35) !important;
 }
 
 /* Email form row — side by side */
