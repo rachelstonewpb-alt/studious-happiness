@@ -1,0 +1,682 @@
+<!-- ============================================
+     SUPPORTR — HEAD CODE (CSS + Fonts)
+     Paste into: Webflow > Project Settings > Custom Code > Head Code
+     ============================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================
+   SUPPORTR — DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  --supportr-yellow: #FFD700;
+  --supportr-yellow-light: #FFF8DC;
+  --supportr-black: #0A0A0A;
+  --supportr-dark: #F5F5F5;
+  --supportr-gray: #666;
+  --supportr-white: #FFFFFF;
+  --supportr-text: #1A1A1A;
+}
+
+/* ============================================
+   GLOBAL RESET (scoped to .supportr-page)
+   ============================================ */
+.supportr-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.supportr-page {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--supportr-text);
+  overflow-x: hidden;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.supportr-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s;
+}
+
+.supportr-logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--supportr-black);
+  text-decoration: none;
+}
+
+.supportr-logo span {
+  color: var(--supportr-yellow);
+}
+
+.supportr-nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.supportr-nav-links a {
+  color: var(--supportr-gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.supportr-nav-links a:hover {
+  color: var(--supportr-black);
+}
+
+.supportr-nav-cta {
+  background: var(--supportr-black);
+  color: var(--supportr-white);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.supportr-nav-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+.supportr-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.supportr-hamburger span {
+  width: 25px;
+  height: 2px;
+  background: var(--supportr-black);
+  transition: 0.3s;
+  display: block;
+}
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+.supportr-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.97);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.supportr-mobile-menu.supportr-open {
+  display: flex;
+}
+
+.supportr-mobile-menu a {
+  color: var(--supportr-black);
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.supportr-mobile-menu a:hover {
+  color: var(--supportr-yellow);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.supportr-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 5% 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--supportr-white);
+}
+
+.supportr-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+  animation: supportr-pulse 8s ease-in-out infinite;
+}
+
+@keyframes supportr-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.supportr-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.supportr-hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 4px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: var(--supportr-black);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.supportr-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+  color: var(--supportr-black);
+}
+
+.supportr-hero h1 .supportr-highlight {
+  color: var(--supportr-yellow);
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.supportr-hero p {
+  font-size: 1.15rem;
+  color: var(--supportr-gray);
+  max-width: 550px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.supportr-hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.supportr-btn-primary {
+  background: var(--supportr-black);
+  color: var(--supportr-white);
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.supportr-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.supportr-btn-secondary {
+  background: transparent;
+  color: var(--supportr-black);
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline-block;
+}
+
+.supportr-btn-secondary:hover {
+  border-color: var(--supportr-yellow);
+  color: var(--supportr-black);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.supportr-stats {
+  padding: 80px 5%;
+  background: var(--supportr-black);
+  color: var(--supportr-white);
+}
+
+.supportr-stats-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.supportr-stat-item {
+  padding: 40px 20px;
+}
+
+.supportr-stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.supportr-stat-number {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--supportr-yellow);
+  letter-spacing: -2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.supportr-stat-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.supportr-stat-rate {
+  font-size: 0.78rem;
+  color: rgba(255, 215, 0, 0.6);
+  margin-top: 8px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ============================================
+   SECTION SHARED STYLES
+   ============================================ */
+.supportr-section {
+  padding: 100px 5%;
+}
+
+.supportr-section-label {
+  display: inline-block;
+  color: var(--supportr-black);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  background: rgba(255, 215, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.supportr-section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  line-height: 1.15;
+  color: var(--supportr-black);
+}
+
+.supportr-section-sub {
+  color: var(--supportr-gray);
+  font-size: 1.05rem;
+  max-width: 550px;
+  line-height: 1.7;
+  margin-bottom: 60px;
+}
+
+.supportr-yellow-text {
+  color: var(--supportr-yellow);
+}
+
+/* ============================================
+   SERVICES GRID
+   ============================================ */
+.supportr-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.supportr-service-card {
+  background: var(--supportr-white);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 40px 30px;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.supportr-service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--supportr-yellow);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+
+.supportr-service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.supportr-service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+.supportr-service-emoji {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.supportr-service-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--supportr-black);
+}
+
+.supportr-service-card p {
+  color: var(--supportr-gray);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+.supportr-about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.supportr-about-content p {
+  color: var(--supportr-gray);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.supportr-about-content p strong {
+  color: var(--supportr-black);
+}
+
+/* ============================================
+   HOW IT WORKS — STEPS
+   ============================================ */
+.supportr-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.supportr-step {
+  text-align: center;
+  padding: 30px;
+  position: relative;
+}
+
+.supportr-step-num {
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(255, 215, 0, 0.3);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.supportr-step h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--supportr-black);
+}
+
+.supportr-step p {
+  color: var(--supportr-gray);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
+.supportr-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.supportr-testimonial-card {
+  background: var(--supportr-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.supportr-testimonial-stars {
+  color: var(--supportr-yellow);
+  font-size: 1rem;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.supportr-testimonial-card p {
+  color: var(--supportr-gray);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.supportr-testimonial-author {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--supportr-black);
+}
+
+.supportr-testimonial-role {
+  color: var(--supportr-gray);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* ============================================
+   CONTACT FORM
+   ============================================ */
+.supportr-contact-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.supportr-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.supportr-contact-form input,
+.supportr-contact-form textarea,
+.supportr-contact-form select {
+  background: var(--supportr-dark);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: var(--supportr-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.supportr-contact-form input:focus,
+.supportr-contact-form textarea:focus,
+.supportr-contact-form select:focus {
+  outline: none;
+  border-color: var(--supportr-yellow);
+}
+
+.supportr-contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.supportr-contact-form select option {
+  background: var(--supportr-white);
+}
+
+.supportr-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.supportr-contact-btn {
+  background: var(--supportr-black);
+  color: var(--supportr-white);
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.supportr-contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.supportr-footer {
+  padding: 40px 5%;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--supportr-black);
+  color: var(--supportr-white);
+}
+
+.supportr-footer p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.supportr-footer-socials {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.supportr-footer-socials a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.supportr-footer-socials a:hover {
+  color: var(--supportr-yellow);
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+.supportr-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.supportr-fade-up.supportr-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .supportr-nav-links {
+    display: none;
+  }
+
+  .supportr-nav-cta.supportr-desktop {
+    display: none;
+  }
+
+  .supportr-hamburger {
+    display: flex;
+  }
+
+  .supportr-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
