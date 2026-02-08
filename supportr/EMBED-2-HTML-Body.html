@@ -178,20 +178,25 @@
       <div class="supportr-section-title">Ready to Get <span class="supportr-yellow-text">Supported</span>?</div>
       <div class="supportr-section-sub" style="margin-left: auto; margin-right: auto;">Drop us a message and let's talk about how we can help your business thrive.</div>
     </div>
-    <form class="supportr-contact-form" id="supportr-contact-form">
+    <form class="supportr-contact-form" id="supportr-contact-form" action="https://formsubmit.co/enduranceguidenetwork@gmail.com" method="POST">
+      <!-- FormSubmit config (hidden fields) -->
+      <input type="hidden" name="_subject" value="New Supportr Inquiry">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
       <div class="supportr-form-row">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
       </div>
       <select name="service" required>
         <option value="" disabled selected>What service are you interested in?</option>
-        <option value="admin">Admin &amp; Virtual Assistance</option>
-        <option value="newsletter">Newsletter Copy</option>
-        <option value="inbox">Customer Service Inbox Management</option>
-        <option value="design">Medal &amp; Shirt Design</option>
-        <option value="race">Race Permitting, Logistics &amp; Coordination</option>
-        <option value="social">Social Media Management</option>
-        <option value="multiple">Multiple Services</option>
+        <option value="Admin &amp; Virtual Assistance">Admin &amp; Virtual Assistance</option>
+        <option value="Newsletter Copy">Newsletter Copy</option>
+        <option value="Customer Service Inbox Management">Customer Service Inbox Management</option>
+        <option value="Medal &amp; Shirt Design">Medal &amp; Shirt Design</option>
+        <option value="Race Permitting, Logistics &amp; Coordination">Race Permitting, Logistics &amp; Coordination</option>
+        <option value="Social Media Management">Social Media Management</option>
+        <option value="Multiple Services">Multiple Services</option>
       </select>
       <textarea name="message" placeholder="Tell us about your project or needs..."></textarea>
       <button type="submit" class="supportr-contact-btn">Send Message</button>

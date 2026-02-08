@@ -101,17 +101,8 @@ document.addEventListener('DOMContentLoaded', function () {
   checkCounters();
   checkFadeUps();
 
-  // ─── CONTACT FORM HANDLER ──────────────────
-  // NOTE: In Webflow, you may want to replace this with
-  // Webflow's native form handling or connect to your
-  // preferred form service (e.g., Zapier, Make, etc.)
-  var contactForm = document.getElementById('supportr-contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      alert('Thanks for reaching out! We\'ll be in touch soon.');
-      contactForm.reset();
-    });
-  }
+  // ─── CONTACT FORM ──────────────────────────
+  // Form submissions are handled by FormSubmit.co
+  // and emailed to enduranceguidenetwork@gmail.com
 });
 </script>
