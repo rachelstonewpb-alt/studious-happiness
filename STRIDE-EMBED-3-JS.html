@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
-  /* ── Color Palette ── */
+  /* Colors */
   var MIDNIGHT = "#0A0E17";
   var NAVY = "#131A2B";
   var CHARCOAL = "#1C2333";
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {bg:"linear-gradient(135deg,#2A1E3A,#120A1E)",ic:"\u{1F319}",tag:"Road",tagCol:GOLD}
   ];
 
-  /* ── CMS Integration ── */
+  /* CMS */
   function readCMSRaces() {
     var items = document.querySelectorAll("[data-race-name]");
     if (!items.length) return null;
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
       + '<div style="position:absolute;top:16px;left:16px;font-size:40px;z-index:0;opacity:0.12;">'+race.img.ic+'</div>'
       + '<div style="position:relative;z-index:2;padding:24px;">'
       + badge
-      + '<div style="font-size:36px;margin-bottom:12px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));">'+race.img.ic+'</div>'
+      + '<div style="font-size:36px;margin-bottom:12px;">'+race.img.ic+'</div>'
       + '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">'
       + '<span style="color:'+GOLD+';font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">'+esc(race.type)+'</span>'
       + '<span style="background:rgba('+tr+',0.15);color:'+tc+';font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:0.5px;">'+esc(race.terrain)+'</span>'
@@ -250,7 +250,8 @@ document.addEventListener("DOMContentLoaded", function () {
       + '<span style="color:rgba(255,255,255,0.7);font-size:12px;">\u{1F4C5} '+esc(race.date)+'</span>'
       + '<span style="color:rgba(255,255,255,0.7);font-size:12px;">\u{1F4CD} '+esc(race.city)+'</span>'
       + '</div>'
-      + '<div style="display:flex;justify-content:flex-end;align-items:center;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;">'
+      + '<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;">'
+      + '<a href="#/submit" style="color:#6B7B8D;font-size:10px">Claim listing</a>'
       + '<span style="color:'+GOLD+';font-weight:700;font-size:15px;">'+esc(race.price)+'</span>'
       + '</div></div></div>';
   }
@@ -795,7 +796,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var el=document.getElementById("stride-state-map");
     if(!el||typeof mapboxgl==="undefined")return;
     var g=GEO[sc];if(!g)return;
-    mapboxgl.accessToken="MAPBOX_TOKEN_REMOVED";
+    mapboxgl.accessToken=window.STRIDE_MB||"";if(!mapboxgl.accessToken)return;
     if(sMap){sMap.remove();sMap=null;}
     sMap=new mapboxgl.Map({container:el,style:"mapbox://styles/mapbox/dark-v11",center:[g[1],g[0]],zoom:g[2],attributionControl:false});
     sMap.addControl(new mapboxgl.NavigationControl({showCompass:false}),"top-right");
